@@ -33,7 +33,7 @@
 @section('jscustom')
 <script type="text/javascript">
 	function CargarTabla(){
-		$.get("{{url('/cargar/tabla/paquetes')}}", function(data){
+		$.get("{{url('/cargar/card/rutina')}}", function(data){
          var html='<div class="container">'+
 '<div class="row justify-content-center">';
           for(i=0; i<data.length; i++) {

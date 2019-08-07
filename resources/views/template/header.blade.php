@@ -471,7 +471,7 @@
 
                                     @can('GestionarRutinas')
                                         <li>
-                                            <a href="{{url('/nuevaRutina')}}">
+                                            <a href="{{url('/nuevoEjercicio')}}">
                                                 <span class="sub-item">Crear ejercicio</span>
                                             </a>
                                         </li>
