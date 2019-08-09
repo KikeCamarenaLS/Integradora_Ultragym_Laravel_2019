@@ -8,7 +8,7 @@
 			</center>
 			<br>
 			<div class="col-lg-12 ml-auto mr-auto" ><!-- Fin div tabla -->
-				<table class="table table-bordered  table-bordered-bd-primary mt-4">
+				<table class="table table-bordered table-bordered-bd-primary mt-4 table-responsive">
 					<thead class= "thead-dark">
 						<tr>
 							<th scope="col">#</th>
@@ -50,7 +50,7 @@
 		<!-- Modal: Modal: Usuarios de Rol-->
 		<div class="modal fade right" id="Usuario_Roles" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 		aria-hidden="true" data-backdrop="true">
-		<div class="modal-dialog modal-lg modal-right modal-notify modal-info modal-dialog-scrollable" role="document">
+		<div class="modal-dialog modal-lg modal-right modal-notify modal-info modal-dialog-scrollable " role="document">
 			<div class="modal-content">
 				<!--Header-->
 				<div class="modal-header">
@@ -76,7 +76,7 @@
 							</div><!--fin div caracteristicas Modal -->
 
 							<div class="col-lg-12 ml-auto mr-auto" v-else><!--div tabla -->
-								<table class="table table-bordered  table-bordered-bd-primary mt-4">
+								<table class="table table-bordered table-bordered-bd-primary mt-4 table-responsive">
 									<thead class= "thead-dark">
 										<tr>
 											<th scope="col">#</th>
@@ -295,18 +295,19 @@
 					this.ArrayRolesDisponibles = response.data
 				});
 
-				RolesCombo();
+				//RolesCombo();
+				this.VerPermisosRol(1);
 			},
-
-			RolesCombo: function(){
+			
+			/*RolesCombo: function(idRol){
 				Swal.fire({
 				  title: 'Eliga el nuevo Rol',
 				  inputOptions: {
-				  	for ( i = 0; i < this.ArrayRolesDisponibles.length ; i++) {
-				  		Things[i]
+				  	for($i = 0; $i<1; $i++){
+
 				  	}
 
-				  }
+				  },
 				  cancelButtonText: 'Cancelar',
 				  inputAttributes: {
 				    autocapitalize: 'off'
@@ -331,7 +332,7 @@
 				  },
 				  allowOutsideClick: () => !Swal.isLoading()
 				})
-			},//fin DatoCategoria
+			},//fin DatoCategoria */
 
 		}, //fin methods
 
