@@ -47,4 +47,11 @@ LEFT JOIN permissions per ON rhp.permission_id = per.id*/
 
     }
 
+    public function PermisosPorRol($idRol){
+
+     $permisos = "select rhs.*, per.NAME AS permiso FROM role_has_permissions rhs LEFT JOIN permissions per ON rhs.permission_id = per.id WHERE rhs.role_id = ".$idRol;
+     $PermisoByRol = DB::select($permisos);
+     return $PermisoByRol;
+    }
+
 }
