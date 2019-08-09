@@ -1763,11 +1763,86 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      ArrayRoles: [] //Array que obtiene todos los roles existentes
+      ArrayRoles: [],
+      //Array que obtiene todos los roles existentes
+      RolUsuarios: "",
+      RolPermisos: "",
+      ArrayUsuariosDeRol: [] //variable que tiene los usuarios segun el rol a buscar
       //fin return
 
     };
@@ -1781,11 +1856,34 @@ __webpack_require__.r(__webpack_exports__);
     getRoles: function getRoles() {
       var _this = this;
 
-      var urlgetRoles = '/get-roles-permisos';
+      var urlgetRoles = '/get-roles';
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(urlgetRoles).then(function (response) {
         _this.ArrayRoles = response.data;
       });
-    } //fin getRoles
+    },
+    //fin getRoles
+    VerUsuariosRol: function VerUsuariosRol(idRol) {
+      var _this2 = this;
+
+      //Funcion que muestra modal con los usuarios que son determinado rol
+      //se recupera el id de del rol para realizar la busqueda
+      this.RolUsuarios = ""; //limpiar la variable RolUsuarios
+
+      this.ArrayUsuariosDeRol = []; //for que recorre el array con los roles
+
+      for (var i = 0; i < this.ArrayRoles.length; i++) {
+        //if para comparar si el id a buscar es igual al del array y asignar el nombre de Rol a variable RolesUsuarios
+        if (this.ArrayRoles[i]["id"] == idRol) {
+          this.RolUsuarios = this.ArrayRoles[i]["name"];
+        }
+      }
+
+      var urlUsuariosPorRol = '/get-usuarios-by-rol/' + idRol;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(urlUsuariosPorRol).then(function (response) {
+        _this2.ArrayUsuariosDeRol = response.data;
+      });
+      $('#Usuario_Roles').modal('show');
+    } //fin VerUsuariosRol
 
   } //fin methods
   //fin export default
@@ -37169,7 +37267,67 @@ var render = function() {
                     _c(
                       "td",
                       { staticStyle: { "text-transform": "uppercase" } },
-                      [_vm._v(" " + _vm._s(rol.Rol) + " ")]
+                      [_vm._v(" " + _vm._s(rol.name) + " ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      [
+                        _c("center", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-info",
+                              on: {
+                                click: function($event) {
+                                  return _vm.VerUsuariosRol(rol.id)
+                                }
+                              }
+                            },
+                            [
+                              _c("span", { staticClass: "btn-label" }, [
+                                _c("i", { staticClass: "la la-users" })
+                              ]),
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\t\tVer usuarios con rol " +
+                                  _vm._s(rol.name) +
+                                  "\n\t\t\t\t\t\t\t\t"
+                              )
+                            ]
+                          )
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      [
+                        _c("center", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-info",
+                              on: {
+                                click: function($event) {
+                                  return _vm.VerPermisosRol(rol.id)
+                                }
+                              }
+                            },
+                            [
+                              _c("span", { staticClass: "btn-label" }, [
+                                _c("i", { staticClass: "la la-users" })
+                              ]),
+                              _vm._v(
+                                "\n\t\t\t\t\t\t\t\t\tVer permisos del rol " +
+                                  _vm._s(rol.name) +
+                                  "\n\t\t\t\t\t\t\t\t"
+                              )
+                            ]
+                          )
+                        ])
+                      ],
+                      1
                     )
                   ])
                 }),
@@ -37180,6 +37338,102 @@ var render = function() {
         ])
       ],
       1
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade right",
+        attrs: {
+          id: "Usuario_Roles",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true",
+          "data-backdrop": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "modal-dialog modal-full-height modal-right modal-notify modal-info",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h4",
+                  {
+                    staticClass:
+                      "title4-long-responsive-section izq blue font-bold text-uppercase"
+                  },
+                  [
+                    _c("p", { staticClass: "heading lead" }, [
+                      _vm._v(
+                        "Usuarios de " + _vm._s(_vm.RolUsuarios) + "\n\t\t\t\t"
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(1)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", [
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c("br"),
+                    _vm._v(" "),
+                    _vm.ArrayUsuariosDeRol.length == 0
+                      ? _c("div", { staticClass: "col-md-12" }, [
+                          _c("h6", [_vm._v("Sin usuarios asignados")])
+                        ])
+                      : _vm._e()
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "modal-footer justify-content-center flex-column flex-md-row"
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn btn-outline-primary btn-rounded btn-md ml-4",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Cerrar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success btn-rounded btn-md ml-4",
+                      attrs: { type: "button", "data-dismiss": "modal" },
+                      on: {
+                        click: function($event) {
+                          return _vm.GuardarAccion()
+                        }
+                      }
+                    },
+                    [_vm._v("Guardar")]
+                  )
+                ]
+              )
+            ])
+          ]
+        )
+      ]
     )
   ])
 }
@@ -37192,9 +37446,36 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo de rol")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo de rol")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Usuarios")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Permisos")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [
+        _c(
+          "span",
+          { staticClass: "white-text", attrs: { "aria-hidden": "true" } },
+          [_vm._v("×")]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
