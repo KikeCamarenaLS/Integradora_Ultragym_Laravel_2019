@@ -178,7 +178,7 @@
 												<span class="btn-label">
 													<i class="la la-times-circle"></i>
 												</span>
-												Quitar Rol
+												Quitar Permiso
 											</button>
 										</td>
 									</tr>
@@ -223,6 +223,8 @@
 
 				ArrayUsuariosDeRol: [], //variable que tiene los usuarios segun el rol a buscar
 				ArrayPermisosPorUsuario: [],
+
+				ArrayRolesDisponibles: [],
 			}//fin return
 		},//fin data
 
@@ -286,13 +288,25 @@
 			},
 
 			CambiarRol:function(idPersona){ //Funcion que cambia el Rol de los Usuarios segun su id
-				alert(idPersona);
+				this.ArrayRolesDisponibles = [];
+
+				var urlDispoblesRoles = '/Roles-disponibles-Persona/'+idPersona;
+				axios.get(urlDispoblesRoles).then(response =>{
+					this.ArrayRolesDisponibles = response.data
+				});
+
+				RolesCombo();
 			},
 
-			DatoCategoria: function(nombre, idCategoria, ideBienCate){
+			RolesCombo: function(){
 				Swal.fire({
-				  title: 'Ingrese el nombre que suplira la categoria: '+nombre,
-				  input: 'text',
+				  title: 'Eliga el nuevo Rol',
+				  inputOptions: {
+				  	for ( i = 0; i < this.ArrayRolesDisponibles.length ; i++) {
+				  		Things[i]
+				  	}
+
+				  }
 				  cancelButtonText: 'Cancelar',
 				  inputAttributes: {
 				    autocapitalize: 'off'

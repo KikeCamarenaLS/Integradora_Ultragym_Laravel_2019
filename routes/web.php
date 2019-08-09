@@ -91,3 +91,4 @@ Route::get('/get-roles', 'RolesController@getRoles')->name('getRoles');
 Route::get('/get-roles-Admin','RolesController@RolesAdministrador')->name('AdminRoles');
 Route::get('/get-usuarios-by-rol/{idRol?}', 'RolesController@UsuariosPorRol')->name('UsuariosPorRol');
 Route::get('/get-permisos-by-rol/{idRol?}', 'RolesController@PermisosPorRol')->name('PermisosPorRol');
+Route::get('/Roles-disponibles-Persona/{idPersona?}', 'RolesController@RolesDiferentesRol')->name('RolesDisponibles');

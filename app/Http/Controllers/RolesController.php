@@ -54,4 +54,11 @@ LEFT JOIN permissions per ON rhp.permission_id = per.id*/
      return $PermisoByRol;
     }
 
+    public function RolesDiferentesRol($idUsuario){
+
+        $usuario= "select rol.* FROM roles rol WHERE rol.id != ( select mhs.role_id FROM model_has_roles mhs WHERE mhs.model_id = ".$idUsuario.")";
+        $RolesDisponibles = DB::select($usuario);
+        return $RolesDisponibles;
+    }
+
 }
