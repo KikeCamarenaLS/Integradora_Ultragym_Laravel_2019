@@ -21,6 +21,7 @@ class PermisosSeed extends Seeder
             $role->givePermissionTo($permisosInstructor[$i]);
         }
 
+        /* Role Nutriologo  */
         $permisosNutriolog = ['VerPaquetes', 'Comprar','VerTienda' , 'GestionarDietas', 'ConsultarDieta', 'GestionarSalud', 'ConsultarAvanceSalud' ];
 
         $roleNutriologo = Role::find(3);
@@ -28,6 +29,7 @@ class PermisosSeed extends Seeder
         for($i=0; $i< count($permisosNutriolog) ;$i++){
             $roleNutriologo->givePermissionTo($permisosNutriolog[$i]);
         }
+        /* Rol Cliente */
 
         $permisosCliente = ['VerPaquetes', 'Comprar','VerTienda' ,  'ConsultarDieta',  'ConsultarAvanceSalud', 'ConsultarAvances', 'VerPersonal','ConsultarRutina'];
 
@@ -35,7 +37,20 @@ class PermisosSeed extends Seeder
 
         for($i=0; $i< count($permisosCliente) ;$i++){
             $roleCliente->givePermissionTo($permisosCliente[$i]);
-            //her
+
         }
+
+        /* Invitado */
+
+        $rolInvitado = Role::find(5);
+
+        $permisosInvitado = ['VerPaquetes' , 'VerTienda'];
+
+        for($i =0; $i< count($permisosInvitado); $i++){
+            $rolInvitado->givePermissionTo($permisosInvitado[$i]);
+        }
+
+
+
     }
 }
