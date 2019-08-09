@@ -68,8 +68,7 @@ function buscar(){
                     +'<th scope="col" style="color:white;">Fecha Nacimiento</th>'
                     +'<th scope="col" style="color:white;">Direccion</th>'
                     +'<th scope="col" style="color:white;">Telefono</th>'
-                    +'<th scope="col" style="color:white;">Eliminar</th>'
-                    +'<th scope="col" style="color:white;">Editar</th></tr></thead>'
+                    +'</thead>'
                     +'<tbody style=" overflow: auto;">';
           for(i=0; i<data.length; i++) {
              var nombre="'"+data[i].name+"'";

@@ -29,7 +29,7 @@
 							{{-- <div class="col-md-4 has-error has-feedback" > --}}
 								<div class="col-md-4" >
 									<label>Nombre(s)</label>
-									<input required="" type="text" class="form-control success" id="Nombre" name="Nombre" placeholder="Nombre(s)" onkeypress="validarN()" onautocomplete="validarN()">
+									<input required="" type="text" class="form-control success" id="Nombre" name="Nombre" placeholder="Nombre(s)" onkeypress="validarN()" onkeyup="validarN()">
 									{{-- {{Form::text('Nombre',null,["class" => "form-control","placeholder" => "Nombre(s)","id" => "Nombre",])}} --}}
 								</div>
 								<div class="col-md-4">
@@ -46,7 +46,7 @@
 							<div class="form-group row " >
 								<div class="col-md-12">
 									<label>Direccion</label>
-									<input required="" type="text" class="form-control" id="Direccion" name="Direccion" placeholder="Direccion " onkeypress="validarDir()" onautocomplete="validarDir()" >
+									<input required="" type="text" class="form-control" id="Direccion" name="Direccion" placeholder="Direccion " onkeypress="validarDir()" onload="validarDir()" >
 								</div>
 
 							</div>
@@ -64,7 +64,7 @@
 								</div>
 								<div class="col-md-4">
 									<label>Contraseña</label>
-									<input  type="password" class="form-control" id="Contra" name="Contra" placeholder="Contraseña" onkeypress="validarcontra()" onautocomplete="validarcontra()">
+									<input  type="password" class="form-control" id="Contra" name="Contra" placeholder="Contraseña" onkeypress="validarcontra()" >
 								</div>
 
 							</div>
