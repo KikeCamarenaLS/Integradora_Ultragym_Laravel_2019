@@ -27,4 +27,15 @@ class RolesController extends Controller
     	$consultaroles = 'select per.name, rol.name from permissions per leftjoin role_has_permissions rhs on per.id = rhs.permission_id
     				      leftjoin roles r on rhs.role_id = r.id';
     }
+
+     public function RolesAdministrador(){
+
+        $Administrador = "select rol.id AS ID_ROL , rol.name AS Rol, per.id AS ID_Permiso, per.name AS Permiso
+            FROM role_has_permissions rhp LEFT JOIN roles rol ON rhp.role_id = rol.id
+            LEFT JOIN permissions per ON rhp.permission_id = per.id where rol.id = 1";
+        $resultados = DB::select($Administrador);
+
+        return $resultados;
+    }
+
 }

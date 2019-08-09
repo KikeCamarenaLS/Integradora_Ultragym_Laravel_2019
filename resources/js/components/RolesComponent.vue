@@ -13,23 +13,12 @@
 						<tr>
 							<th scope="col">#</th>
 							<th scope="col">Tipo de rol</th>
-							<th scope="col">Permisos</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr v-for="(rol, index) in ArrayRoles">
 							<th scope="row" >{{index + 1}}</th>
-							<td style="text-transform: uppercase;"> {{ categoria.Bien }} </td>
-							<td style="text-transform: uppercase;"> {{ categoria.Categoria }} </td>
-							<td>
-								<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Editar categoria" v-on:click="EditarCategoria( categoria.ID_Categoria )"> Editar Nombre
-									<i class="la la-edit"></i>
-								</button>
-
-								<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Editar categoria" v-on:click="AgregarCarcateristica( categoria.ID_Categoria ,categoria.ID_Bien )"> Agregar Caracteristicas
-									<i class="la la-list-ol"></i>
-								</button>
-							</td>
+							<td style="text-transform: uppercase;"> {{ rol.Rol }} </td>
 						</tr>
 					</tbody>
 				</table>

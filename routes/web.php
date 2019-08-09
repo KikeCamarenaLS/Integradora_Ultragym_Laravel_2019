@@ -88,3 +88,4 @@ Route::get('/modificar_personal/modificar/{id?}/{nom?}/{ap?}/{am?}/{direccion?}/
 //Roles
 Route::get('/Roles','RolesController@vistaRoles')->name('vistaRoles');
 Route::get('/get-roles-permisos', 'RolesController@getRoles')->name('getRoles');
+Route::get('/get-roles-Admin','RolesController@RolesAdministrador')->name('AdminRoles');

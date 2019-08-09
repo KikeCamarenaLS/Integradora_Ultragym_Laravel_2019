@@ -1763,17 +1763,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -37180,65 +37169,8 @@ var render = function() {
                     _c(
                       "td",
                       { staticStyle: { "text-transform": "uppercase" } },
-                      [_vm._v(" " + _vm._s(_vm.categoria.Bien) + " ")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticStyle: { "text-transform": "uppercase" } },
-                      [_vm._v(" " + _vm._s(_vm.categoria.Categoria) + " ")]
-                    ),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-link btn-primary btn-lg",
-                          attrs: {
-                            type: "button",
-                            "data-toggle": "tooltip",
-                            title: "",
-                            "data-original-title": "Editar categoria"
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.EditarCategoria(
-                                _vm.categoria.ID_Categoria
-                              )
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(" Editar Nombre\n\t\t\t\t\t\t\t\t"),
-                          _c("i", { staticClass: "la la-edit" })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-link btn-primary btn-lg",
-                          attrs: {
-                            type: "button",
-                            "data-toggle": "tooltip",
-                            title: "",
-                            "data-original-title": "Editar categoria"
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.AgregarCarcateristica(
-                                _vm.categoria.ID_Categoria,
-                                _vm.categoria.ID_Bien
-                              )
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(" Agregar Caracteristicas\n\t\t\t\t\t\t\t\t"),
-                          _c("i", { staticClass: "la la-list-ol" })
-                        ]
-                      )
-                    ])
+                      [_vm._v(" " + _vm._s(rol.Rol) + " ")]
+                    )
                   ])
                 }),
                 0
@@ -37260,9 +37192,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo de rol")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Permisos")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo de rol")])
       ])
     ])
   }
@@ -49579,15 +49509,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./resources/js/components/RolesComponent.vue ***!
   \****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RolesComponent_vue_vue_type_template_id_524ffdeb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RolesComponent.vue?vue&type=template&id=524ffdeb& */ "./resources/js/components/RolesComponent.vue?vue&type=template&id=524ffdeb&");
 /* harmony import */ var _RolesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RolesComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/RolesComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _RolesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _RolesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -49617,7 +49546,7 @@ component.options.__file = "resources/js/components/RolesComponent.vue"
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/RolesComponent.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49663,8 +49592,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\UltraGymIntegradora\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\UltraGymIntegradora\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\Integradora_Ultragym_Laravel_2019\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\Integradora_Ultragym_Laravel_2019\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
