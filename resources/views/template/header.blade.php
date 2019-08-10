@@ -176,6 +176,11 @@
                                                 <span class="sub-item">Permisos</span>
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="{{url('/listado')}}">
+                                                <span class="sub-item">Listado Usuarios</span>
+                                            </a>
+                                        </li>
 
                                     </ul>
                                 </div>

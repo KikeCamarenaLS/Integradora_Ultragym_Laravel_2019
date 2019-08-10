@@ -21,6 +21,8 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('roles-consulta' , require('./components/RolesComponent.vue').default);
+Vue.component('permisos-rol', require('./components/PermisosRol.vue').default);
+Vue.component('roles-permiso', require('./components/RolesPErmisos.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

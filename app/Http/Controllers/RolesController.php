@@ -21,8 +21,22 @@ class RolesController extends Controller
 
     public function getRoles()
     {
-    	$roles= Role::all();
+    	$roles= Role::orderBy('id')->get();
+       // $rolesDB = "select rol.*, per.id AS id_permiso, per.NAME AS Permiso FROM roles rol INNER JOIN role_has_permissions rhs ON rol.id = 
+       //                rhs.role_id INNER JOIN permissions per ON rhs.permission_id = per.id";
+       // $roles = DB::select($rolesDB);
+
     	return $roles;
+
+
+    }
+
+    public function getPermisos(){
+        $rolesDB = "select rhs.role_id AS id_rol, per.id AS id_permiso, per.NAME FROM role_has_permissions rhs INNER JOIN permissions per ON 
+                    rhs.permission_id = per.id ORDER BY rhs.role_id";
+        $permisos = DB::select($rolesDB);
+        //$permisos = Permission::orderBy('id')->get();
+        return $permisos;
     }
 
      public function RolesAdministrador(){

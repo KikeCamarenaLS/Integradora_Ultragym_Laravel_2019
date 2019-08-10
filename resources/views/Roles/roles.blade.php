@@ -22,8 +22,13 @@
 			<div class="card-body">
 				{{-- inicio del row --}}
 
-				<div id="app">
+			<!--	<div id="app">
 					<roles-consulta></roles-consulta>
+				</div>
+				<script src="{{ asset('js/app.js') }}"></script> -->
+
+				<div id="app">
+					<roles-permiso></roles-permiso>
 				</div>
 				<script src="{{ asset('js/app.js') }}"></script>
 
