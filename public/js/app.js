@@ -2229,153 +2229,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2391,7 +2244,7 @@ __webpack_require__.r(__webpack_exports__);
       //variable que tiene los usuarios segun el rol a buscar
       ArrayPermisosPorUsuario: [],
       ArrayRolesDisponibles: [],
-      NuevoRol: "" //return
+      RolNuevo: "" //return
 
     };
   },
@@ -2419,61 +2272,88 @@ __webpack_require__.r(__webpack_exports__);
         _this2.ArrayPermisosRol = response.data;
       });
     },
-    VerUsuariosRol: function VerUsuariosRol(idRol) {
+    NuevoRol: function NuevoRol() {
       var _this3 = this;
 
-      //Funcion que muestra modal con los usuarios que son determinado rol
-      //se recupera el id de del rol para realizar la busqueda
-      this.RolUsuarios = ""; //limpiar la variable RolUsuarios
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+        title: 'Ingrese el nuevo Rol',
+        input: 'text',
+        cancelButtonText: 'Cancelar',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Guardar',
+        showLoaderOnConfirm: true,
+        preConfirm: function preConfirm(Rol) {
+          if (Rol == "") {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.showValidationMessage("Ingrese un nombre para el nuevo Rol");
+          } else {
+            var validar = false;
 
-      this.ArrayUsuariosDeRol = []; //for que recorre el array con los roles
+            for (var i = 0; i < _this3.ArrayRoles.length; i++) {
+              if (_this3.ArrayRoles[i]["name"].toUpperCase() == Rol.toUpperCase()) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.showValidationMessage("Rol Existente, Ingrese un rol diferente");
+                validar = true;
+              }
+            }
 
-      for (var i = 0; i < this.ArrayRoles.length; i++) {
-        //if para comparar si el id a buscar es igual al del array y asignar el nombre de Rol a variable RolesUsuarios
-        if (this.ArrayRoles[i]["id"] == idRol) {
-          this.RolUsuarios = this.ArrayRoles[i]["name"];
+            if (validar) {} else {
+              _this3.RolNuevo = Rol;
+
+              _this3.RegistrarRol();
+            }
+          }
+        },
+        allowOutsideClick: function allowOutsideClick() {
+          return !sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.isLoading();
         }
-      }
-
-      var urlUsuariosPorRol = '/get-usuarios-by-rol/' + idRol;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(urlUsuariosPorRol).then(function (response) {
-        _this3.ArrayUsuariosDeRol = response.data;
       });
-      $('#Usuario_Roles').modal('show');
     },
-    //fin VerUsuariosRol
-    VerPermisosRol: function VerPermisosRol(idRol) {
+    RegistrarRol: function RegistrarRol() {
       var _this4 = this;
 
-      //Funcion que muestra los permisos de cada rol
-      this.RolPermisos = ""; //limpiar la variable RolUsuarios
+      var urlRegistroRol = '/registro-rol/';
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(urlRegistroRol, {
+        'RolNuevoRegistro': this.RolNuevo
+      }).then(function (response) {
+        _this4.NotificacionSucces('Se registro el rol exitosamente');
 
+        _this4.Limpiar();
+
+        _this4.getRoles();
+
+        _this4.getPermisosRoles();
+      })["catch"](function (error) {
+        var placementFrom = 'top';
+        var placementAlign = 'center';
+        var state = 'danger';
+        var style = 'withicon';
+        var content = {};
+        content.message = 'Ocurrio un error, intente de nuevo porfavor' + error;
+        content.title = 'Error';
+        content.icon = 'la la-frown-o';
+        $.notify(content, {
+          type: state,
+          placement: {
+            from: placementFrom,
+            align: placementAlign
+          },
+          time: 1000
+        }); //fin notificacion
+      });
+    },
+    Limpiar: function Limpiar() {
+      this.ArrayRoles = [];
+      this.ArrayPermisosRol = [];
+      this.RolUsuarios = "";
+      this.RolPermisos = "";
+      this.ArrayUsuariosDeRol = [];
       this.ArrayPermisosPorUsuario = [];
-
-      for (var i = 0; i < this.ArrayRoles.length; i++) {
-        //if para comparar si el id a buscar es igual al del array y asignar el nombre de Rol a variable RolesUsuarios
-        if (this.ArrayRoles[i]["id"] == idRol) {
-          this.RolPermisos = this.ArrayRoles[i]["name"];
-        }
-      }
-
-      var urlPermisosPorRol = '/get-permisos-by-rol/' + idRol;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(urlPermisosPorRol).then(function (response) {
-        _this4.ArrayPermisosPorUsuario = response.data;
-      });
-      $('#Permisos_Roles').modal('show');
-    },
-    CambiarRol: function CambiarRol(idPersona) {
-      var _this5 = this;
-
-      //Funcion que cambia el Rol de los Usuarios segun su id
       this.ArrayRolesDisponibles = [];
-      var urlDispoblesRoles = '/Roles-disponibles-Persona/' + idPersona;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(urlDispoblesRoles).then(function (response) {
-        _this5.ArrayRolesDisponibles = response.data;
-      });
-      this.ComboRoles();
+      this.RolNuevo = "";
     },
+    //Fin Limpiar
     ComboRoles: function ComboRoles() {
       sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
         title: 'Select field validation',
@@ -2487,7 +2367,26 @@ __webpack_require__.r(__webpack_exports__);
         inputPlaceholder: 'Select a fruit',
         showCancelButton: true
       });
-    }
+    },
+    NotificacionSucces: function NotificacionSucces(mensaje) {
+      var placementFrom = 'top';
+      var placementAlign = 'right';
+      var state = 'success';
+      var style = 'withicon';
+      var content = {};
+      content.message = mensaje;
+      content.title = 'Edición exitosa';
+      content.icon = 'la la-clipboard';
+      $.notify(content, {
+        type: state,
+        placement: {
+          from: placementFrom,
+          align: placementAlign
+        },
+        time: 1000
+      });
+    } //fin Notificacion succes
+
   } //export default
 
 });
@@ -41517,319 +41416,94 @@ var render = function() {
         _vm._v(" "),
         _c("br"),
         _vm._v(" "),
-        _c("div", { staticClass: "col-lg-12 ml-auto mr-auto" }, [
-          _c(
-            "table",
-            {
-              staticClass:
-                "table table-bordered table-bordered-bd-primary mt-4 table-responsive"
-            },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.ArrayRoles, function(rol, index) {
-                  return _c("tr", [
-                    _c("th", { attrs: { scope: "row" } }, [
-                      _vm._v(_vm._s(index + 1))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticStyle: { "text-transform": "uppercase" } },
-                      [_vm._v(" " + _vm._s(rol.name) + " ")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticStyle: { "text-transform": "uppercase" } },
-                      _vm._l(_vm.ArrayPermisosRol, function(permisos, index) {
-                        return _c("ul", [
-                          permisos.id_rol == rol.id
-                            ? _c("li", [
-                                _vm._v(" " + _vm._s(permisos.NAME) + " ")
-                              ])
-                            : _vm._e()
-                        ])
-                      }),
-                      0
-                    )
-                  ])
-                }),
-                0
-              )
-            ]
-          )
-        ])
+        _c("br"),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success",
+            on: {
+              click: function($event) {
+                return _vm.NuevoRol()
+              }
+            }
+          },
+          [_vm._m(0), _vm._v("\n\t\t\tAgregar nuevo Rol\n\t\t")]
+        ),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-lg-12 ml-auto mr-auto table-responsive" },
+          [
+            _c(
+              "table",
+              {
+                staticClass:
+                  "table table-bordered table-bordered-bd-primary mt-4 table table-striped"
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.ArrayRoles, function(rol, index) {
+                    return _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(_vm._s(index + 1))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticStyle: { "text-transform": "uppercase" } },
+                        [_vm._v(" " + _vm._s(rol.name) + " ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticStyle: { "text-transform": "uppercase" } },
+                        [
+                          _c(
+                            "select",
+                            {
+                              staticClass: "form-control multrol",
+                              attrs: { multiple: "multiple" }
+                            },
+                            _vm._l(_vm.ArrayPermisosRol, function(
+                              permisos,
+                              index
+                            ) {
+                              return permisos.id_rol == rol.id
+                                ? _c("option", [_vm._v(_vm._s(permisos.NAME))])
+                                : _vm._e()
+                            }),
+                            0
+                          )
+                        ]
+                      )
+                    ])
+                  }),
+                  0
+                )
+              ]
+            )
+          ]
+        )
       ],
       1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade right",
-        attrs: {
-          id: "Usuario_Roles",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true",
-          "data-backdrop": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass:
-              "modal-dialog modal-lg modal-right modal-notify modal-info modal-dialog-scrollable ",
-            attrs: { role: "document" }
-          },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h4",
-                  {
-                    staticClass:
-                      "title4-long-responsive-section izq blue font-bold text-uppercase"
-                  },
-                  [
-                    _c("p", { staticClass: "heading lead" }, [
-                      _vm._v(
-                        "Usuarios de " +
-                          _vm._s(_vm.RolUsuarios) +
-                          "\n\t\t\t\t\t"
-                      )
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _vm._m(1)
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", [
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c("br"),
-                    _vm._v(" "),
-                    _vm.ArrayUsuariosDeRol.length == 0
-                      ? _c("div", { staticClass: "col-md-12" }, [
-                          _c("h6", [_vm._v("Sin usuarios asignados")])
-                        ])
-                      : _c(
-                          "div",
-                          { staticClass: "col-lg-12 ml-auto mr-auto" },
-                          [
-                            _c(
-                              "table",
-                              {
-                                staticClass:
-                                  "table table-bordered table-bordered-bd-primary mt-4 table-responsive"
-                              },
-                              [
-                                _vm._m(2),
-                                _vm._v(" "),
-                                _c(
-                                  "tbody",
-                                  _vm._l(_vm.ArrayUsuariosDeRol, function(
-                                    usuario,
-                                    index
-                                  ) {
-                                    return _c("tr", [
-                                      _c("th", { attrs: { scope: "row" } }, [
-                                        _vm._v(_vm._s(index + 1))
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "td",
-                                        {
-                                          staticStyle: {
-                                            "text-transform": "uppercase"
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            " " +
-                                              _vm._s(usuario.name) +
-                                              " " +
-                                              _vm._s(usuario.apellido_P) +
-                                              " " +
-                                              _vm._s(usuario.apellido_M) +
-                                              " "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("td", [_vm._v(_vm._s(usuario.email))]),
-                                      _vm._v(" "),
-                                      _c("td", [
-                                        _vm._v(_vm._s(usuario.telefono) + " ")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("td", [
-                                        _c(
-                                          "button",
-                                          {
-                                            staticClass: "btn btn-default",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.CambiarRol(
-                                                  usuario.id
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [
-                                            _vm._m(3, true),
-                                            _vm._v(
-                                              "\n\t\t\t\t\t\t\t\t\t\t\t\t\tCambiar Rol\n\t\t\t\t\t\t\t\t\t\t\t\t"
-                                            )
-                                          ]
-                                        )
-                                      ])
-                                    ])
-                                  }),
-                                  0
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(4)
-            ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade right",
-        attrs: {
-          id: "Permisos_Roles",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true",
-          "data-backdrop": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          {
-            staticClass:
-              "modal-dialog modal-lg modal-right modal-notify modal-info modal-dialog-scrollable",
-            attrs: { role: "document" }
-          },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h4",
-                  {
-                    staticClass:
-                      "title4-long-responsive-section izq blue font-bold text-uppercase"
-                  },
-                  [
-                    _c("p", { staticClass: "heading lead" }, [
-                      _vm._v(
-                        "Permisos de " +
-                          _vm._s(_vm.RolPermisos) +
-                          "\n\t\t\t\t\t"
-                      )
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _vm._m(5)
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", [
-                  _c("div", { staticClass: "form-group row" }, [
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("br"),
-                    _c("br"),
-                    _c("br"),
-                    _vm._v(" "),
-                    _vm._m(6),
-                    _vm._v(" "),
-                    _c("hr"),
-                    _vm._v(" "),
-                    _vm.ArrayPermisosPorUsuario.length == 0
-                      ? _c("div", { staticClass: "col-md-12" }, [
-                          _c("h6", [_vm._v("Sin usuarios asignados")])
-                        ])
-                      : _c(
-                          "div",
-                          { staticClass: "col-lg-12 ml-auto mr-auto" },
-                          [
-                            _c(
-                              "table",
-                              {
-                                staticClass:
-                                  "table table-bordered  table-bordered-bd-primary mt-4"
-                              },
-                              [
-                                _vm._m(7),
-                                _vm._v(" "),
-                                _c(
-                                  "tbody",
-                                  _vm._l(_vm.ArrayPermisosPorUsuario, function(
-                                    permisos,
-                                    index
-                                  ) {
-                                    return _c("tr", [
-                                      _c("th", { attrs: { scope: "row" } }, [
-                                        _vm._v(_vm._s(index + 1))
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "td",
-                                        {
-                                          staticStyle: {
-                                            "text-transform": "uppercase"
-                                          }
-                                        },
-                                        [
-                                          _vm._v(
-                                            " " + _vm._s(permisos.permiso) + " "
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _vm._m(8, true)
-                                    ])
-                                  }),
-                                  0
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(9)
-            ])
-          ]
-        )
-      ]
     )
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "btn-label" }, [
+      _c("i", { staticClass: "la la-plus-circle" })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -41843,172 +41517,6 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Permisos")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [
-        _c(
-          "span",
-          { staticClass: "white-text", attrs: { "aria-hidden": "true" } },
-          [_vm._v("×")]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "thead-dark" }, [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Telefono")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "btn-label" }, [
-      _c("i", { staticClass: "la la-pencil" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "modal-footer justify-content-center flex-column flex-md-row"
-      },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-outline-primary btn-rounded btn-md ml-4",
-            attrs: { type: "button", "data-dismiss": "modal" }
-          },
-          [_vm._v("Cerrar")]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [
-        _c(
-          "span",
-          { staticClass: "white-text", attrs: { "aria-hidden": "true" } },
-          [_vm._v("×")]
-        )
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("button", { staticClass: "btn btn-success" }, [
-      _c("span", { staticClass: "btn-label" }, [
-        _c("i", { staticClass: "la la-plus-circle" })
-      ]),
-      _vm._v("\n\t\t\t\t\t\t\t\tAgregar Permiso\n\t\t\t\t\t\t\t")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "thead-dark" }, [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Permiso")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: {
-            "v:on-click":
-              "QuitarPermiso( permisos.permission_id, permisos.role_id)"
-          }
-        },
-        [
-          _c("span", { staticClass: "btn-label" }, [
-            _c("i", { staticClass: "la la-times-circle" })
-          ]),
-          _vm._v(
-            "\n\t\t\t\t\t\t\t\t\t\t\t\t\tQuitar Permiso\n\t\t\t\t\t\t\t\t\t\t\t\t"
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "modal-footer justify-content-center flex-column flex-md-row"
-      },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-outline-primary btn-rounded btn-md ml-4",
-            attrs: { type: "button", "data-dismiss": "modal" }
-          },
-          [_vm._v("Cerrar")]
-        )
-      ]
-    )
   }
 ]
 render._withStripped = true

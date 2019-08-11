@@ -75,4 +75,14 @@ LEFT JOIN permissions per ON rhp.permission_id = per.id*/
         return $RolesDisponibles;
     }
 
+    public function RegistrarRol(Request $request){
+
+            $NombreRol = $request->RolNuevoRegistro;
+
+            DB::table('roles')->insert([
+                'name' => $NombreRol,
+                'guard_name' => 'web'
+            ]);
+    }
+
 }
