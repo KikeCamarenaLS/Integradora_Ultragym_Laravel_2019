@@ -128,7 +128,7 @@
 				    }
 				  },
 				  allowOutsideClick: () => !Swal.isLoading()
-				})
+				});
 			},
 
 			RegistrarRol: function(){

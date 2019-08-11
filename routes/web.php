@@ -94,3 +94,9 @@ Route::get('/get-permisos-by-rol/{idRol?}', 'RolesController@PermisosPorRol')->n
 Route::get('/Roles-disponibles-Persona/{idPersona?}', 'RolesController@RolesDiferentesRol')->name('RolesDisponibles');
 Route::get('/Permisos-de-rol', 'RolesController@getPermisos')->name('RolesDeRol');
 Route::put('/registro-rol/', 'RolesController@RegistrarRol')->name('RegistroRol');
+
+//Permisos
+
+Route::get('/Permisos', 'PermisosControler@vistaPermisos')->name('vistaPermisos');
+Route::get('/get-permisos', 'PermisosControler@getPermisos')->name('getPermisos');
+Route::put('/registrar-permiso', 'PermisosControler@registroPermisos')->name('registroPermiso');

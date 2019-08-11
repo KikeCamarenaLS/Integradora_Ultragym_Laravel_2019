@@ -1745,14 +1745,173 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      ArrayPermisos: [],
+      PermisoNuevo: ""
+    };
   },
-  created: function created() {},
+  created: function created() {
+    this.getPermisos(); //this.datatable();
+  },
   methods: {
+    datatable: function datatable() {
+      $(function () {
+        $('#tablin').DataTable({
+          scrollX: false,
+          scrollCollapse: true,
+          filter: false,
+          lengthMenu: [[7, 14, 21, 28, 35, -1], [7, 14, 21, 28, 35, "Todos"]],
+          iDisplayLength: 7,
+          "language": {
+            "lengthMenu": "Mostrar _MENU_ datos",
+            "zeroRecords": "No existe el dato introducido",
+            "info": "Página _PAGE_ de _PAGES_ ",
+            "infoEmpty": "Sin datos disponibles",
+            "infoFiltered": "(mostrando los datos filtrados: _MAX_)",
+            "paginate": {
+              "first": "Primero",
+              "last": "Ultimo",
+              "next": "Siguiente",
+              "previous": "Anterior"
+            },
+            "search": "Buscar",
+            "processing": "Buscando...",
+            "loadingRecords": "Cargando..."
+          }
+        });
+      });
+    },
+    getPermisos: function getPermisos() {
+      var _this = this;
+
+      var urlPermisos = '/get-permisos';
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(urlPermisos).then(function (response) {
+        _this.ArrayPermisos = response.data;
+      });
+    },
+    NuevoPermiso: function NuevoPermiso() {
+      var _this2 = this;
+
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+        title: 'Ingrese el nuevo Permiso',
+        input: 'text',
+        cancelButtonText: 'Cancelar',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Guardar',
+        showLoaderOnConfirm: true,
+        preConfirm: function preConfirm(Permiso) {
+          if (Permiso == "") {
+            sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.showValidationMessage("Ingrese un nombre para el nuevo Permiso");
+          } else {
+            var validar = false;
+
+            for (var i = 0; i < _this2.ArrayPermisos.length; i++) {
+              if (_this2.ArrayPermisos[i]["name"].toUpperCase() == Permiso.toUpperCase()) {
+                sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.showValidationMessage("Permiso existente, Ingrese un rol diferente");
+                validar = true;
+              }
+            }
+
+            if (validar) {} else {
+              _this2.PermisoNuevo = Permiso;
+
+              _this2.RegistrarPermiso();
+            }
+          }
+        },
+        allowOutsideClick: function allowOutsideClick() {
+          return !sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.isLoading();
+        }
+      });
+    },
+    RegistrarPermiso: function RegistrarPermiso() {
+      var _this3 = this;
+
+      var urlRegistroPermiso = '/registrar-permiso';
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(urlRegistroPermiso, {
+        'PermisoNuevo': this.PermisoNuevo
+      }).then(function (response) {
+        _this3.NotificacionSucces('Se registro el permiso exitosamente');
+
+        _this3.limpiar();
+
+        _this3.getPermisos();
+      })["catch"](function (error) {
+        var placementFrom = 'top';
+        var placementAlign = 'center';
+        var state = 'danger';
+        var style = 'withicon';
+        var content = {};
+        content.message = 'Ocurrio un error, intente de nuevo porfavor' + error;
+        content.title = 'Error';
+        content.icon = 'la la-frown-o';
+        $.notify(content, {
+          type: state,
+          placement: {
+            from: placementFrom,
+            align: placementAlign
+          },
+          time: 1000
+        }); //fin notificacion
+      });
+    },
+    limpiar: function limpiar() {
+      this.ArrayPermisos = [];
+      this.PermisoNuevo = "";
+    },
+    NotificacionSucces: function NotificacionSucces(mensaje) {
+      var placementFrom = 'top';
+      var placementAlign = 'right';
+      var state = 'success';
+      var style = 'withicon';
+      var content = {};
+      content.message = mensaje;
+      content.title = 'Registro exitoso';
+      content.icon = 'la la-clipboard';
+      $.notify(content, {
+        type: state,
+        placement: {
+          from: placementFrom,
+          align: placementAlign
+        },
+        time: 1000
+      });
+    },
+    //fin Notificacion succes
     ActivarBoton: function ActivarBoton() {
       sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
         title: 'Select field validation',
@@ -40643,19 +40802,96 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c(
-      "button",
-      {
-        on: {
-          click: function($event) {
-            return _vm.ActivarBoton()
-          }
-        }
-      },
-      [_vm._v("\n\t\tOprimir\n\t")]
+      "div",
+      { attrs: { id: "resultados-busqueda" } },
+      [
+        _c("br"),
+        _vm._v(" "),
+        _c("center", [
+          _c("p", { staticClass: "lead" }, [_vm._v("Permisos disponibles")])
+        ]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success",
+            on: {
+              click: function($event) {
+                return _vm.NuevoPermiso()
+              }
+            }
+          },
+          [_vm._m(0), _vm._v("\n\t\t\tAgregar nuevo Permiso\n\t\t")]
+        ),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-lg-12 ml-auto mr-auto table-responsive" },
+          [
+            _c(
+              "table",
+              {
+                staticClass:
+                  "table table-bordered table-bordered-bd-primary mt-4 table table-striped",
+                attrs: { id: "tablin" }
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.ArrayPermisos, function(permiso, index) {
+                    return _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(_vm._s(index + 1))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticStyle: { "text-transform": "uppercase" } },
+                        [_vm._v(" " + _vm._s(permiso.name) + " ")]
+                      )
+                    ])
+                  }),
+                  0
+                )
+              ]
+            )
+          ]
+        )
+      ],
+      1
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "btn-label" }, [
+      _c("i", { staticClass: "la la-plus-circle" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Permiso")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
