@@ -22,6 +22,10 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('roles-consulta' , require('./components/RolesComponent.vue').default);
 
+Vue.component('permisos-rol', require('./components/PermisosRol.vue').default);
+Vue.component('roles-permiso', require('./components/RolesPermisos.vue').default);
+Vue.component('listado-usuarios', require('./components/ListadoUsuarios.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

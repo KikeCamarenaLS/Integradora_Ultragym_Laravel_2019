@@ -99,3 +99,21 @@ Route::get('/get-roles', 'RolesController@getRoles')->name('getRoles');
 Route::get('/get-roles-Admin','RolesController@RolesAdministrador')->name('AdminRoles');
 Route::get('/get-usuarios-by-rol/{idRol?}', 'RolesController@UsuariosPorRol')->name('UsuariosPorRol');
 Route::get('/get-permisos-by-rol/{idRol?}', 'RolesController@PermisosPorRol')->name('PermisosPorRol');
+Route::get('/Roles-disponibles-Persona/{idPersona?}', 'RolesController@RolesDiferentesRol')->name('RolesDisponibles');
+Route::get('/Permisos-de-rol', 'RolesController@getPermisos')->name('RolesDeRol');
+Route::put('/registro-rol/', 'RolesController@RegistrarRol')->name('RegistroRol');
+
+//Permisos
+
+Route::get('/Permisos', 'PermisosControler@vistaPermisos')->name('vistaPermisos');
+Route::get('/get-permisos', 'PermisosControler@getPermisos')->name('getPermisos');
+Route::put('/registrar-permiso', 'PermisosControler@registroPermisos')->name('registroPermiso');
+
+//Listado Personas
+
+Route::get('/ListadoUsuariosRol' , 'ListadoRolesControler@vistaListado')->name('vistaListadoRol');
+Route::get('/get-Listado', 'ListadoRolesControler@getListado')->name('GetListado');
+Route::get('/roles-diferent-get/{idRol?}', 'ListadoRolesControler@diferentesRoles')->name('DiferentesRoles');
+Route::put('/change-rol', 'ListadoRolesControler@ModificarRol')->name('ModificarRol');
+
+Route::get('/get-Detalles-usuarios/{idUser?}', 'ListadoRolesControler@DetallesUsuario')->name('DetallesUsarioRol');

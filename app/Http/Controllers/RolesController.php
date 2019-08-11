@@ -21,8 +21,22 @@ class RolesController extends Controller
 
     public function getRoles()
     {
-    	$roles= Role::all();
+    	$roles= Role::orderBy('id')->get();
+       // $rolesDB = "select rol.*, per.id AS id_permiso, per.NAME AS Permiso FROM roles rol INNER JOIN role_has_permissions rhs ON rol.id = 
+       //                rhs.role_id INNER JOIN permissions per ON rhs.permission_id = per.id";
+       // $roles = DB::select($rolesDB);
+
     	return $roles;
+
+
+    }
+
+    public function getPermisos(){
+        $rolesDB = "select rhs.role_id AS id_rol, per.id AS id_permiso, per.NAME FROM role_has_permissions rhs INNER JOIN permissions per ON 
+                    rhs.permission_id = per.id ORDER BY rhs.role_id";
+        $permisos = DB::select($rolesDB);
+        //$permisos = Permission::orderBy('id')->get();
+        return $permisos;
     }
 
      public function RolesAdministrador(){
@@ -52,6 +66,23 @@ LEFT JOIN permissions per ON rhp.permission_id = per.id*/
      $permisos = "select rhs.*, per.NAME AS permiso FROM role_has_permissions rhs LEFT JOIN permissions per ON rhs.permission_id = per.id WHERE rhs.role_id = ".$idRol;
      $PermisoByRol = DB::select($permisos);
      return $PermisoByRol;
+    }
+
+    public function RolesDiferentesRol($idUsuario){
+
+        $usuario= "select rol.* FROM roles rol WHERE rol.id != ( select mhs.role_id FROM model_has_roles mhs WHERE mhs.model_id = ".$idUsuario.")";
+        $RolesDisponibles = DB::select($usuario);
+        return $RolesDisponibles;
+    }
+
+    public function RegistrarRol(Request $request){
+
+            $NombreRol = $request->RolNuevoRegistro;
+
+            DB::table('roles')->insert([
+                'name' => $NombreRol,
+                'guard_name' => 'web'
+            ]);
     }
 
 }

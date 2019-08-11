@@ -8,7 +8,7 @@
 			</center>
 			<br>
 			<div class="col-lg-12 ml-auto mr-auto" ><!-- Fin div tabla -->
-				<table class="table table-bordered  table-bordered-bd-primary mt-4">
+				<table class="table table-bordered table-bordered-bd-primary mt-4 table-responsive">
 					<thead class= "thead-dark">
 						<tr>
 							<th scope="col">#</th>
@@ -50,7 +50,7 @@
 		<!-- Modal: Modal: Usuarios de Rol-->
 		<div class="modal fade right" id="Usuario_Roles" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 		aria-hidden="true" data-backdrop="true">
-		<div class="modal-dialog modal-lg modal-right modal-notify modal-info modal-dialog-scrollable" role="document">
+		<div class="modal-dialog modal-lg modal-right modal-notify modal-info modal-dialog-scrollable " role="document">
 			<div class="modal-content">
 				<!--Header-->
 				<div class="modal-header">
@@ -76,7 +76,7 @@
 							</div><!--fin div caracteristicas Modal -->
 
 							<div class="col-lg-12 ml-auto mr-auto" v-else><!--div tabla -->
-								<table class="table table-bordered  table-bordered-bd-primary mt-4">
+								<table class="table table-bordered table-bordered-bd-primary mt-4 table-responsive">
 									<thead class= "thead-dark">
 										<tr>
 											<th scope="col">#</th>
@@ -147,12 +147,12 @@
 						<br>
 						<br><br><br>
 
-							<button class="btn btn-success">
-								<span class="btn-label">
+						<button class="btn btn-success">
+							<span class="btn-label">
 								<i class="la la-plus-circle"></i>
-								</span>
-									Agregar Permiso
-							</button>
+							</span>
+							Agregar Permiso
+						</button>
 
 						<hr>
 
@@ -178,7 +178,7 @@
 												<span class="btn-label">
 													<i class="la la-times-circle"></i>
 												</span>
-												Quitar Rol
+												Quitar Permiso
 											</button>
 										</td>
 									</tr>
@@ -203,6 +203,45 @@
 </div>
 <!-- Modal: Usuarios de Rol-->
 
+<!-- Modal -->
+<div class="modal fade" id="CambioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-dark">
+				<h5 class="modal-title" id="exampleModalLongTitle">Roles</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+
+				<div class="form-group col-md-9 ml-auto mr-auto" hidden>
+					<center><label for="inputCity">id</label></center>
+					<input type="text" class="form-control" id="NomMarcaID" name="NomMarcaID" required>
+				</div>
+				<div class="form-group col-md-9 ml-auto mr-auto">
+					<center><label for="inputCity">Eliga el nuevo Rol:</label></center>
+					<select class="form-control input-pill">
+						<option>
+							Seleccione uno..
+						</option>
+						<option v-for= "(roles, index) in ArrayArrayRolesDisponibles" >
+							{{ roles.name }}
+						</option>
+					</select>
+				</div>
+				<center> <button type="submit" class="btn btn-success btn-border btn-round">Guardar Cambios</button></center>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger btn-border btn-round" data-dismiss="modal">Cerrar</button>
+
+			</div>
+		</div>
+	</div>
+</div>
+
 
 </div><!-- Div Principal -->
 
@@ -223,6 +262,10 @@
 
 				ArrayUsuariosDeRol: [], //variable que tiene los usuarios segun el rol a buscar
 				ArrayPermisosPorUsuario: [],
+
+				ArrayRolesDisponibles: [],
+
+				NuevoRol : "",
 			}//fin return
 		},//fin data
 
@@ -286,38 +329,63 @@
 			},
 
 			CambiarRol:function(idPersona){ //Funcion que cambia el Rol de los Usuarios segun su id
-				alert(idPersona);
+				this.ArrayRolesDisponibles = [];
+
+				var urlDispoblesRoles = '/Roles-disponibles-Persona/'+idPersona;
+				axios.get(urlDispoblesRoles).then(response =>{
+					this.ArrayRolesDisponibles = response.data
+				});
+
+				//this.DatoCategoria();
+				//this.VerPermisosRol(1);
+				$('#CambioModal').modal('show');
+				
+				//this.prueba();
 			},
 
-			DatoCategoria: function(nombre, idCategoria, ideBienCate){
-				Swal.fire({
-				  title: 'Ingrese el nombre que suplira la categoria: '+nombre,
-				  input: 'text',
-				  cancelButtonText: 'Cancelar',
-				  inputAttributes: {
-				    autocapitalize: 'off'
+			prueba:function(){
+				swal({
+				  text: 'Search for a movie. e.g. "La La Land".',
+				  content: "input",
+				  button: {
+				    text: "Search!",
+				    closeModal: false,
 				  },
-				  showCancelButton: true,
-				  confirmButtonText: 'Editar',
-				  showLoaderOnConfirm: true,
-				  preConfirm: (categoria) => {
-
-				    if(categoria.toUpperCase() == nombre.toUpperCase()){
-				    	console.log("categoria");
-				    	Swal.showValidationMessage("Ingrese un nombre diferente")
-				    }else if(categoria == ""){
-				    	Swal.showValidationMessage("Ingrese un nombre para la categoria");
-				    }else{
-				    	console.log(categoria);
-				    	this.NombreNuevo = categoria;
-				    	this.IDCat = idCategoria;
-				    	//this.EditarBD(categoria, idCategoria);
-				    	this.EdicionEnBD();
-				    }
-				  },
-				  allowOutsideClick: () => !Swal.isLoading()
 				})
-			},//fin DatoCategoria
+				.then(name => {
+				  if (!name) throw null;
+				 
+				  return fetch(`https://itunes.apple.com/search?term=${name}&entity=movie`);
+				})
+				.then(results => {
+				  return results.json();
+				})
+				.then(json => {
+				  const movie = json.results[0];
+				 
+				  if (!movie) {
+				    return swal("No movie was found!");
+				  }
+				 
+				  const name = movie.trackName;
+				  const imageURL = movie.artworkUrl100;
+				 
+				  swal({
+				    title: "Top result:",
+				    text: name,
+				    icon: imageURL,
+				  });
+				})
+				.catch(err => {
+				  if (err) {
+				    swal("Oh noes!", "The AJAX request failed!", "error");
+				  } else {
+				    swal.stopLoading();
+				    swal.close();
+				  }
+				});
+			}
+			
 
 		}, //fin methods
 

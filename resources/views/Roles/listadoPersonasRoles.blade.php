@@ -2,7 +2,7 @@
 
 
 @section('content_header')
-<h4 class="page-title">Roles</h4>
+<h4 class="page-title">Listado usuarios de sistema</h4>
 
 @stop
 
@@ -16,7 +16,7 @@
 		<div class="card"><!-- inicio de cuerpo card -->
 			<!-- Cabecera titulo -->
 			<div class="card-header">
-				<div class="card-title">Roles</div>
+				<div class="card-title">Usuarios</div>
 
 			</div><!-- fin cabecera   -->
 			<div class="card-body">
@@ -28,7 +28,7 @@
 				<script src="{{ asset('js/app.js') }}"></script> -->
 
 				<div id="app">
-					<roles-permiso></roles-permiso>
+					<listado-usuarios></listado-usuarios>
 				</div>
 				<script src="{{ asset('js/app.js') }}"></script>
 
