@@ -10,7 +10,7 @@
 @section('content')
 
 
-<body onload="">
+<body onload="mensaje('{{$color}}','{{$mensaje}}');">
 <div class="row"><!-- Inicio ROW-->
 	<div class="col-md-12"><!-- Inicio de columna de row -->
 		<div class="card"><!-- inicio de cuerpo card -->
@@ -23,7 +23,7 @@
 				<center>
 					<div class="col-md-4">
 						<label>Nombre(s)</label>
-						<input required="" type="text" class="form-control success" id="NombreB" name="NombreB" placeholder="Nombre(s)" onkeypress="buscar()">
+						<input required="" type="text" class="form-control success" id="NombreB" name="NombreB" placeholder="Nombre(s)" onkeypress="buscar()" onkeyup="buscar()">
 					</div>
 				</center>
 					<br>
@@ -201,7 +201,7 @@ function buscar(){
                       '<th scope="row">'+data[i].fecha_nacimiento+'</th>'+
                       '<th scope="row">'+data[i].direccion+'</th>'+
                       '<th scope="row">'+data[i].telefono+'</th>'+
-                      '<th><form action="{{ url('modelo/eliminarRegistro') }}/'+data[i].id+'" method="POST">'+
+                      '<th><form action="{{ url('personal/eliminarRegistro') }}/'+data[i].id+'" method="POST">'+
                       '@csrf'+
                       '{{method_field('DELETE')}}'+
                       '<button type="submit" class="btn btn-danger" onclick=" return confirm("Seguro que quieres eliminarlo")">Eliminar</button></form></th>'

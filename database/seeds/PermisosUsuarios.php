@@ -11,7 +11,7 @@ class PermisosUsuarios extends Seeder
      */
     public function run()
     {
-        $permisos = ['UsuariosSistema','GestionarClientes' , 'VerTienda' , 'GestionarTienda' , 'GestionarAvances', 'ConsultarAvances', 'ModificarPersonal', 'VerPersonal', 'GestionarDietas', 'ConsultarDieta', 'ConsultarRutina', 'GestionarRutinas', 'RegistroPersonal', 'GestionarPaquetes', 'VerPaquetes', 'Comprar', 'Invitado'];
+        $permisos = ['UsuariosSistema','GestionarClientes' , 'VerTienda' , 'GestionarTienda' , 'GestionarAvances', 'ConsultarAvances', 'ModificarPersonal', 'VerPersonal', 'GestionarDietas', 'ConsultarDieta', 'ConsultarRutina', 'GestionarRutinas', 'RegistroPersonal', 'GestionarPaquetes', 'VerPaquetes', 'Comprar', 'Invitado', 'GestionarSalud', 'ConsultarAvanceSalud'];
 
     	for ($i=0; $i < count($permisos); $i++) {
     		DB::table('permissions')->insert([

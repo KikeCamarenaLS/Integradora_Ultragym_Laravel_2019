@@ -29,16 +29,16 @@
 							{{-- <div class="col-md-4 has-error has-feedback" > --}}
 								<div class="col-md-4" >
 									<label>Nombre(s)</label>
-									<input required="" type="text" class="form-control success" id="Nombre" name="Nombre" placeholder="Nombre(s)" onkeypress="validarN()" >
+									<input required="" type="text" class="form-control success" id="Nombre" name="Nombre" placeholder="Nombre(s)" onkeypress="validarN()" onkeyup="validarN()">
 									{{-- {{Form::text('Nombre',null,["class" => "form-control","placeholder" => "Nombre(s)","id" => "Nombre",])}} --}}
 								</div>
 								<div class="col-md-4">
 									<label>Apellido Paterno</label>
-									<input required="" type="text" class="form-control" id="Apellido_Paterno" name="Apellido_Paterno" placeholder="Apellido Paterno " onkeypress="validarAp()">
+									<input required="" type="text" class="form-control" id="Apellido_Paterno" name="Apellido_Paterno" placeholder="Apellido Paterno " onkeypress="validarAp()" onautocomplete="validarAp()">
 								</div>
 								<div class="col-md-4">
 									<label>Apellido Materno</label>
-									<input required="" type="text" class="form-control" id="Apellido_Materno" name="Apellido_Materno" placeholder="Apellido Materno" onkeypress="validarAm()">
+									<input required="" type="text" class="form-control" id="Apellido_Materno" name="Apellido_Materno" placeholder="Apellido Materno" onkeypress="validarAm()" onautocomplete="validarAm()">
 								</div>
 							</div>
 							{{-- fin del row --}}
@@ -46,7 +46,7 @@
 							<div class="form-group row " >
 								<div class="col-md-12">
 									<label>Direccion</label>
-									<input required="" type="text" class="form-control" id="Direccion" name="Direccion" placeholder="Direccion " onkeypress="validarDir()" >
+									<input required="" type="text" class="form-control" id="Direccion" name="Direccion" placeholder="Direccion " onkeypress="validarDir()" onload="validarDir()" >
 								</div>
 
 							</div>
@@ -56,15 +56,15 @@
 							<div class="form-group row " >
 								<div class="col-md-4">
 									<label>Correo Personal<span class="required-label" style="display: none;" name="co" id="co"> Repetido</span></label>
-									<input  type="email" class="form-control " id="Correo_Personal" name="Correo_Personal" placeholder="Correo Personal" onkeypress="validarCor()">
+									<input  type="email" class="form-control " id="Correo_Personal" name="Correo_Personal" placeholder="Correo Personal" onkeypress="validarCor()" onautocomplete="validarCor()">
 								</div>
 								<div class="col-md-4">
 									<label>Telefono</label>
-									<input  type="number" name="Telefono" min="10000000"  class="form-control" id="Telefono" name="Telefono" placeholder="Telefono "  onkeypress="validartel">
+									<input  type="number" name="Telefono" min="10000000"  class="form-control" id="Telefono" name="Telefono" placeholder="Telefono "  onkeypress="validartel()" onautocomplete="validartel()" max="9999999999" min="00000000">
 								</div>
 								<div class="col-md-4">
 									<label>Contraseña</label>
-									<input  type="text" class="form-control" id="Contra" name="Contra" placeholder="Contraseña" onkeypress="validarcontra()">
+									<input  type="password" class="form-control" id="Contra" name="Contra" placeholder="Contraseña" onkeypress="validarcontra()" >
 								</div>
 
 							</div>

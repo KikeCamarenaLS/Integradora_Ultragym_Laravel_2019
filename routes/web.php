@@ -84,7 +84,8 @@ Route::get('/comboRoles/Roles','PersonalController@comboRoles')->name('comboRole
 Route::get('/modificar_personal','PersonalController@ModificarPersonalvista')->name('ModificarPersonalvista');//Vista modificar
 Route::get('/Consulta/Personal/{nom?}','PersonalController@ConsultaPersonal')->name('ConsultaPersonal');//Vista modificar
 Route::get('/modificar_personal/modificar/{id?}/{nom?}/{ap?}/{am?}/{direccion?}/{correo?}/{tel?}/{fecha?}','PersonalController@ModificarPersona')->name('vistaModificarPersona');//Guardar Personal
-
+Route::delete('personal/eliminarRegistro/{id}', 'PersonalController@eliminarPersonal')->name('eliminarPersonal');
+Route::get('/listado_personal','PersonalController@vistaPersonal')->name('vistaPersonal');//Vista Registrar
 
 
 
@@ -94,4 +95,7 @@ Route::get('/modificar_personal/modificar/{id?}/{nom?}/{ap?}/{am?}/{direccion?}/
 
 //Roles
 Route::get('/Roles','RolesController@vistaRoles')->name('vistaRoles');
-Route::get('/get-roles-permisos', 'RolesController@getRoles')->name('getRoles');
+Route::get('/get-roles', 'RolesController@getRoles')->name('getRoles');
+Route::get('/get-roles-Admin','RolesController@RolesAdministrador')->name('AdminRoles');
+Route::get('/get-usuarios-by-rol/{idRol?}', 'RolesController@UsuariosPorRol')->name('UsuariosPorRol');
+Route::get('/get-permisos-by-rol/{idRol?}', 'RolesController@PermisosPorRol')->name('PermisosPorRol');
