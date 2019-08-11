@@ -100,3 +100,8 @@ Route::put('/registro-rol/', 'RolesController@RegistrarRol')->name('RegistroRol'
 Route::get('/Permisos', 'PermisosControler@vistaPermisos')->name('vistaPermisos');
 Route::get('/get-permisos', 'PermisosControler@getPermisos')->name('getPermisos');
 Route::put('/registrar-permiso', 'PermisosControler@registroPermisos')->name('registroPermiso');
+
+//Listado Personas
+
+Route::get('/ListadoUsuariosRol' , 'ListadoRolesControler@vistaListado')->name('vistaListadoRol');
+Route::get('/get-Listado', 'ListadoRolesControler@getListado')->name('GetListado');

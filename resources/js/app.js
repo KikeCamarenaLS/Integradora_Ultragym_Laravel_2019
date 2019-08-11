@@ -23,7 +23,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('roles-consulta' , require('./components/RolesComponent.vue').default);
 
 Vue.component('permisos-rol', require('./components/PermisosRol.vue').default);
-Vue.component('roles-permiso', require('./components/RolesPErmisos.vue').default);
+Vue.component('roles-permiso', require('./components/RolesPermisos.vue').default);
+Vue.component('listado-usuarios', require('./components/ListadoUsuarios.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -177,7 +177,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{url('/listado')}}">
+                                            <a href="{{url('/ListadoUsuariosRol')}}">
                                                 <span class="sub-item">Listado Usuarios</span>
                                             </a>
                                         </li>
