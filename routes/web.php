@@ -87,11 +87,23 @@ Route::get('/modificar_personal/modificar/{id?}/{nom?}/{ap?}/{am?}/{direccion?}/
 Route::delete('personal/eliminarRegistro/{id}', 'PersonalController@eliminarPersonal')->name('eliminarPersonal');
 Route::get('/listado_personal','PersonalController@vistaPersonal')->name('vistaPersonal');//Vista Registrar
 
-
-
-
-
 //Fin Personal
+
+
+
+//Clientes
+Route::get('/nuevo_cliente','ClienteController@vistaRegistrarCliente')->name('vistaRegistrarCliente');//Vista Registrar
+Route::get('/nuevo_cliente/registrar/{nom?}/{ap?}/{am?}/{direccion?}/{correo?}/{tel?}/{contra?}/{t_us?}','ClienteController@RegistrarCliente')->name('RegistrarCliente');//Guardar Personal
+Route::get('/modificar_cliente','ClienteController@ModificarClientevista')->name('ModificarClientevista');//Vista modificar
+Route::get('/modificar_cliente/modificar/{id?}/{nom?}/{ap?}/{am?}/{direccion?}/{correo?}/{tel?}','ClienteController@ModificarCliente')->name('ModificarCliente');//Guardar Personal
+Route::get('/Consulta/Cliente/{nom?}','ClienteController@ConsultaCliente')->name('ConsultaCliente');//Vista modificar
+Route::delete('cliente/eliminarRegistro/{id}', 'ClienteController@eliminarCliente')->name('eliminarCliente');
+Route::get('/Consultar_Cliente','ClienteController@vistaCliente')->name('vistaCliente');//Vista Registrar
+
+
+
+//Fin clientes
+
 
 //Roles
 Route::get('/Roles','RolesController@vistaRoles')->name('vistaRoles');
