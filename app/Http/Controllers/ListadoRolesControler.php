@@ -27,4 +27,26 @@ class ListadoRolesControler extends Controller
 		return $listadoDB;
 
     }
+
+    public function diferentesRoles($idRol)
+    {
+    	$roles = "SELECT id AS id_Rol, name FROM roles WHERE roles.id != ".$idRol;
+    	$rolesDB = DB::select($roles);
+    	return $rolesDB;
+    }
+
+    public function ModificarRol(Request $request){
+
+    	$IdRol = $request->IdNuevoRol;
+    	$IdUsuario = $request->IdUsuario;
+
+    	$updateRol = "update model_has_roles SET role_id = ".$IdRol." WHERE model_id = ".$IdUsuario;
+    	DB::update($updateRol);
+    }
+
+    public function DetallesUsuario($idUsuario){
+
+    	$user = User::where('id',$idUsuario)->get();
+    	return $user;
+    }
 }

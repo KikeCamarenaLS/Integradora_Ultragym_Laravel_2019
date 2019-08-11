@@ -1785,12 +1785,91 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      ArrayListado: [] //fin return
+      ArrayListado: [],
+      ArrayRolesDisponibles: [],
+      OpcionesCombo: "",
+      ArrayDetalleUsuairo: [],
+      nombre: "",
+      ApellidoP: "",
+      ApellidoM: "",
+      Correo: "",
+      Telefono: "",
+      Direccion: "",
+      Nacimiento: "" //fin return
 
     };
   },
@@ -1810,12 +1889,120 @@ __webpack_require__.r(__webpack_exports__);
     },
     //fin getListado
     ComboRoles: function ComboRoles(idUsuario, idRol) {
-      alert(idUsuario + " , " + idRol);
+      var _this2 = this;
+
+      this.ArrayRolesDisponibles = [];
+      this.OpcionesCombo = [];
+      var urlRolesDiferentes = '/roles-diferent-get/' + idRol;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(urlRolesDiferentes).then(function (response) {
+        _this2.ArrayRolesDisponibles = response.data;
+
+        _this2.ComboDetalles(idUsuario);
+      });
     },
     //fin ComboRoles
+    ComboDetalles: function ComboDetalles(idUsuario) {
+      var _this3 = this;
+
+      var options = {};
+      $.map(this.ArrayRolesDisponibles, function (o) {
+        options[o.id_Rol] = o.name;
+      });
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+        title: 'Eliga un nuevo rol',
+        input: 'select',
+        inputOptions: options,
+        inputPlaceholder: 'Seleccione nuevo rol',
+        showCancelButton: true,
+        inputValidator: function inputValidator(value) {
+          return new Promise(function (resolve) {
+            if (value <= 0) {
+              resolve("Seleccione una opción.");
+            } else {
+              resolve();
+
+              _this3.modificarRol(value, idUsuario);
+            }
+          });
+        }
+      });
+    },
+    //fin ComboDetalles
+    modificarRol: function modificarRol(idNuevoRol, idUsuario) {
+      var _this4 = this;
+
+      var ModificarRol = '/change-rol';
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(ModificarRol, {
+        'IdNuevoRol': idNuevoRol,
+        'IdUsuario': idUsuario
+      }).then(function (response) {
+        _this4.NotificacionSucces('Se modifico exitosamente el rol');
+
+        _this4.ArrayListado = [];
+        _this4.ArrayRolesDisponibles = [];
+        _this4.OpcionesCombo = "";
+
+        _this4.getListado();
+      })["catch"](function (error) {
+        var placementFrom = 'top';
+        var placementAlign = 'center';
+        var state = 'danger';
+        var style = 'withicon';
+        var content = {};
+        content.message = 'Ocurrio un error, intente de nuevo porfavor' + error;
+        content.title = 'Error';
+        content.icon = 'la la-frown-o';
+        $.notify(content, {
+          type: state,
+          placement: {
+            from: placementFrom,
+            align: placementAlign
+          },
+          time: 1000
+        }); //fin notificacion
+      });
+    },
+    //fin modificar rol
     DetalleUsuario: function DetalleUsuario(idUsuario) {
-      alert(idUsuario);
-    } //fin DetalleUsuario
+      var _this5 = this;
+
+      var UrlGetDetalles = '/get-Detalles-usuarios/' + idUsuario;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(UrlGetDetalles).then(function (response) {
+        _this5.ArrayDetalleUsuairo = response.data;
+
+        _this5.inicializacion();
+      });
+    },
+    //fin DetalleUsuario
+    NotificacionSucces: function NotificacionSucces(mensaje) {
+      var placementFrom = 'top';
+      var placementAlign = 'right';
+      var state = 'success';
+      var style = 'withicon';
+      var content = {};
+      content.message = mensaje;
+      content.title = 'Edición exitosa';
+      content.icon = 'la la-clipboard';
+      $.notify(content, {
+        type: state,
+        placement: {
+          from: placementFrom,
+          align: placementAlign
+        },
+        time: 1000
+      });
+    },
+    //fin Notificacion succes
+    inicializacion: function inicializacion() {
+      this.nombre = this.ArrayDetalleUsuairo[0]["name"];
+      this.ApellidoP = this.ArrayDetalleUsuairo[0]["apellido_P"];
+      this.ApellidoM = this.ArrayDetalleUsuairo[0]["apellido_M"];
+      this.Correo = this.ArrayDetalleUsuairo[0]["email"];
+      this.Telefono = this.ArrayDetalleUsuairo[0]["telefono"];
+      this.Direccion = this.ArrayDetalleUsuairo[0]["direccion"];
+      this.Nacimiento = this.ArrayDetalleUsuairo[0]["fecha_nacimiento"];
+      $('#Detalles_Modal').modal('show');
+    } //fin inicializacion
     // fin methods
 
   } // fin export default
@@ -41000,7 +41187,115 @@ var render = function() {
             )
           ]
         )
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "Detalles_Modal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "myModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-sm",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-body row" }, [
+                  _c(
+                    "h4",
+                    {
+                      staticClass:
+                        "title4-long-responsive-section izq blue font-bold text-uppercase"
+                    },
+                    [_vm._v(" Detalles de usuario  ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "col-lg-5 col-md-6 col-sm-6 col-xs-12",
+                      attrs: { id: "columa-contenido" }
+                    },
+                    [
+                      _c("div", [
+                        _c("div", { staticClass: "form-group row" }, [
+                          _c("div", { staticClass: "col-md-12" }, [
+                            _vm._m(1),
+                            _vm._v(" "),
+                            _c("label", { attrs: { name: "firstname" } }, [
+                              _vm._v(_vm._s(_vm.nombre))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-12" }, [
+                            _vm._m(2),
+                            _vm._v(" "),
+                            _c("label", { attrs: { name: "firstname" } }, [
+                              _vm._v(_vm._s(_vm.ApellidoP))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-12" }, [
+                            _vm._m(3),
+                            _vm._v(" "),
+                            _c("label", { attrs: { name: "firstname" } }, [
+                              _vm._v(_vm._s(_vm.ApellidoM))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-12" }, [
+                            _vm._m(4),
+                            _vm._v(" "),
+                            _c("label", { attrs: { name: "firstname" } }, [
+                              _vm._v(_vm._s(_vm.Correo))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-12" }, [
+                            _vm._m(5),
+                            _vm._v(" "),
+                            _c("label", { attrs: { name: "firstname" } }, [
+                              _vm._v(_vm._s(_vm.Nacimiento))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-12" }, [
+                            _vm._m(6),
+                            _vm._v(" "),
+                            _c("label", { attrs: { name: "firstname" } }, [
+                              _vm._v(_vm._s(_vm.Direccion))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-12" }, [
+                            _vm._m(7),
+                            _vm._v(" "),
+                            _c("label", { attrs: { name: "firstname" } }, [
+                              _vm._v(_vm._s(_vm.Telefono))
+                            ])
+                          ])
+                        ])
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(8)
+              ])
+            ]
+          )
+        ]
+      )
     ])
   ])
 }
@@ -41024,6 +41319,70 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Detalles")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [_c("b", [_vm._v("Nombre :")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [_c("b", [_vm._v("Apellido paterno :")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [_c("b", [_vm._v("Apellido materno :")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [_c("b", [_vm._v("Correo :")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [_c("b", [_vm._v("Fecha nacimiento :")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [_c("b", [_vm._v("Dirección :")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [_c("b", [_vm._v("Telefono :")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "modal-footer justify-content-center flex-column flex-md-row"
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-primary btn-rounded btn-md ml-4",
+            attrs: { type: "button", "data-dismiss": "modal" }
+          },
+          [_vm._v("Cerrar")]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true

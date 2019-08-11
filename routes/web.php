@@ -105,3 +105,7 @@ Route::put('/registrar-permiso', 'PermisosControler@registroPermisos')->name('re
 
 Route::get('/ListadoUsuariosRol' , 'ListadoRolesControler@vistaListado')->name('vistaListadoRol');
 Route::get('/get-Listado', 'ListadoRolesControler@getListado')->name('GetListado');
+Route::get('/roles-diferent-get/{idRol?}', 'ListadoRolesControler@diferentesRoles')->name('DiferentesRoles');
+Route::put('/change-rol', 'ListadoRolesControler@ModificarRol')->name('ModificarRol');
+
+Route::get('/get-Detalles-usuarios/{idUser?}', 'ListadoRolesControler@DetallesUsuario')->name('DetallesUsarioRol');
