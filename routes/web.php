@@ -44,6 +44,13 @@ Route::post('/RegistrarRutina','Gimnasio\Rutinas\RutinaController@registrarRutin
 
 //finRutinas
 
+//Ejercicios
+Route::get('/nuevoEjercicio', 'Gimnasio\Rutinas\RutinaController@vistaRegistrarEjercicio')->name('vistaRegistrarEjercicio');
+Route::get('/cargar/card/rutina/{caja?}','Gimnasio\Rutinas\RutinaController@mostrarCardRutina')->name('jmostrarCardRutina');
+
+
+//fin ejercicios
+
 
 
 

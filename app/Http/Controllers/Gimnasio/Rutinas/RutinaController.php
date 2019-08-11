@@ -14,6 +14,17 @@ class RutinaController extends Controller
     	$mensaje='sin_mensaje';
     	return view('Rutinas.NuevaRutina',compact("color","mensaje"));
     }
+    public function vistaRegistrarEjercicio(){
+        $color='danger';
+        $mensaje='sin_mensaje';
+        return view('Rutinas.NuevoEjercicio',compact("color","mensaje"));
+    }
+    public function mostrarCardRutina($caja){
+        $consulta=DB::select('select * from rutina where  Nombre_Rutina like"%'.$caja.'%"');
+        return $consulta;
+    }
+
+
     public function registrarRutina(Request $request){
     	$rutina=$request->input('Rutina');
     	$Serie=$request->input('Serie');
