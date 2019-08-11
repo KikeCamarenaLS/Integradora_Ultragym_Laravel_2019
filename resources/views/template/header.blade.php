@@ -279,8 +279,6 @@
 
                                         <li>
                                             <a href="{{url('/nuevo_cliente')}}">
-
-
                                                 <span class="sub-item">Nuevo</span>
                                             </a>
                                         </li>
@@ -290,13 +288,8 @@
                                             </a>
                                         </li>
                                          <li>
-                                            <a href="{{url('/Editar_Cliente')}}">
+                                            <a href="{{url('/modificar_cliente')}}">
                                                 <span class="sub-item">Editar</span>
-                                            </a>
-                                        </li>
-                                         <li>
-                                            <a href="{{url('/Eliminar_Cliente')}}">
-                                            <span class="sub-item">Eliminar</span>
                                             </a>
                                         </li>
 
