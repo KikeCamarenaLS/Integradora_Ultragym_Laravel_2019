@@ -20,7 +20,7 @@ class RutinaController extends Controller
         return view('Rutinas.NuevoEjercicio',compact("color","mensaje"));
     }
     public function mostrarCardRutina($caja){
-        $consulta=DB::select('select * from rutina where  Nombre_Rutina like"%'.$caja.'%"');
+        $consulta=DB::select('select * from ejercicio where  Nombre_Ejercicio like"%'.$caja.'%"');
         return $consulta;
     }
 
@@ -35,9 +35,9 @@ class RutinaController extends Controller
 
         $file->move(public_path(). '/images/FotosRutinas/', $rutina . '_'.$Serie.'.jpg');
 
-    	DB::update('insert into rutina value(null,"'.$rutina.'","'.$Descripcion.'",'.$Serie.','.$Repeticion.',"'. $rutina . '_'.$Serie .'.jpg")');
+    	DB::update('insert into ejercicio value(null,"'.$rutina.'","'.$Descripcion.'",'.$Serie.','.$Repeticion.',"'. $rutina . '_'.$Serie .'.jpg")');
 		$color='success';
     	$mensaje='La rutina fue agregada correctamente';
-    	 return view('Rutinas.NuevaRutina')->with(['mensaje' => 'La rutina fue agregada correctamente', 'color' => 'success']);
+    	 return view('Rutinas.NuevoEjercicio')->with(['mensaje' => 'La rutina fue agregada correctamente', 'color' => 'success']);
     }
 }
