@@ -322,7 +322,7 @@
 
                                     @can('GestionarTienda')
                                         <li>
-                                            <a href="{{url('/ver_Tienda')}}">
+                                            <a href="{{url('/productos')}}">
                                                 <span class="sub-item">Subir Producto</span>
                                             </a>
                                         </li>
