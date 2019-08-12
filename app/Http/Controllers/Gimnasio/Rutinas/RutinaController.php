@@ -14,6 +14,11 @@ class RutinaController extends Controller
     	$mensaje='sin_mensaje';
     	return view('Rutinas.NuevaRutina',compact("color","mensaje"));
     }
+    public function vistaVerRutina(){
+        $color='danger';
+        $mensaje='sin_mensaje';
+        return view('Rutinas.VerRutinas',compact("color","mensaje"));
+    }
     public function vistaRegistrarEjercicio(){
         $color='danger';
         $mensaje='sin_mensaje';
