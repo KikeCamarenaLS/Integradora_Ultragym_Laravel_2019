@@ -37,17 +37,28 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         //Almacenar en la BD nuevos recursos
-        $options = [
-            'Nombre_Producto' => $request->title,
-            'Descripcion' => $request->description,
-            'Precio' => $request->price
-        ];
 
-        if(Product::create($options)){
-            return redirect('/');
-        }else{
-            return view('Productos.producto');
-        }
+        $NombreProduct = $request->NombreProducto;
+        $DescripcionProduct = $request->DescripcionProducto ;
+        $PrecioProduct = $request->PrecioProducto ;
+
+        $fecha = date("Y-m-d_h_i_s");
+        $NombreFoto = $fecha."_".$NombreProduct."_".$PrecioProduct.".jpg";
+
+        $product = new Product();
+
+        $product->Nombre_Producto = $NombreProduct;
+        $product->Descripcion = $DescripcionProduct;
+        $product->Precio = $PrecioProduct;
+        $product->image_url = $NombreFoto;
+
+        $product->save();
+
+        //Product::create($options);
+
+        $file = $request->file('Imagen');
+        $name = $file->getClientOriginalName();
+        $file->move(public_path().'/images/Productos/',$NombreFoto);
     }
 
     /**
@@ -58,13 +69,15 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $No_inventario = $request->Inventario;
+
          $NombreProduct = $request->NombreProducto;
         $DescripcionProduct = $request->DescripcionProducto ;
         $PrecioProduct = $request->PrecioProducto ;
 
         $fecha = date("Y-m-d_h_i_s");
         $NombreFoto = $fecha."_".$NombreProduct."_".$PrecioProduct.".jpg";
+
+
 
 
         $options = [

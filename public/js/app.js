@@ -2309,7 +2309,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     //fin ObtenerDatos
     Validacion: function Validacion() {
-      if (this.NombreProducto == "") {
+      if (this.NombreProducto == "" || this.NombreProducto == null) {
         this.MensajeError("Falta ingresar el nombre del producto");
       } else if (this.PrecioProducto == "") {
         this.MensajeError("Falta ingresar el precio del producto");
@@ -2385,13 +2385,14 @@ __webpack_require__.r(__webpack_exports__);
     Almacenar: function Almacenar() {
       var _this2 = this;
 
+      //alert(this.NombreProducto);
       //envio de imagen
       var formData = new FormData();
       formData.append('Imagen', this.imagen); //Enviamos la peticion
 
       formData.append('NombreProducto', this.NombreProducto);
       formData.append('DescripcionProducto', this.DescripcionProducto);
-      formData.append('PrecioProducto', this.DescripcionProducto);
+      formData.append('PrecioProducto', this.PrecioProducto);
       var urlAlmacenar = '/productos_store';
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(urlAlmacenar, formData, {
         headers: {
@@ -2432,6 +2433,11 @@ __webpack_require__.r(__webpack_exports__);
       this.ValorFoto = "";
       this.temporalFoto = "";
       this.imagen = "";
+      document.getElementById('nombre_producto').value = "";
+      document.getElementById('precio_producto').value = "";
+      document.getElementById('descripcion_producto').value = "";
+      document.getElementById('uploadImg').value = "";
+      document.getElementById('cargaImage').src = "/images/default.png";
     },
     //fin limpiar
     NotificacionSucces: function NotificacionSucces(mensaje) {
@@ -41773,6 +41779,7 @@ var render = function() {
           _c("img", {
             staticClass: "img-upload-preview img-circle",
             attrs: {
+              id: "cargaImage",
               src: "/images/default.png",
               alt: "preview",
               width: "100",
@@ -55204,15 +55211,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************************!*\
   !*** ./resources/js/components/PermisosRol.vue ***!
   \*************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PermisosRol_vue_vue_type_template_id_4bf78fd6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PermisosRol.vue?vue&type=template&id=4bf78fd6& */ "./resources/js/components/PermisosRol.vue?vue&type=template&id=4bf78fd6&");
 /* harmony import */ var _PermisosRol_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PermisosRol.vue?vue&type=script&lang=js& */ "./resources/js/components/PermisosRol.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _PermisosRol_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _PermisosRol_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -55242,7 +55248,7 @@ component.options.__file = "resources/js/components/PermisosRol.vue"
 /*!**************************************************************************!*\
   !*** ./resources/js/components/PermisosRol.vue?vue&type=script&lang=js& ***!
   \**************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
