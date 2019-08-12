@@ -22,13 +22,13 @@
 			<div class="card-body">
 				{{-- inicio del row --}}
 
-				<!-- 
+
 				<div id="app">
-					<listado-usuarios></listado-usuarios>
+					<editar-producto></editar-producto>
 				</div>
 				<script src="{{ asset('js/app.js') }}"></script>
-				-->
-				@include('Productos.productoForm')
+
+
 
 			</div><!-- fin cabecera   -->
 
@@ -43,5 +43,8 @@
 @endsection
 
 @section('jscustom')
+<script type="text/javascript">
+
+</script>
 
 @endsection

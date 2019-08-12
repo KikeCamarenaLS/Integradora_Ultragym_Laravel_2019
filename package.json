@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "animate.css": "^3.7.2",
+        "laravel-vue-datatable": "^0.3.0",
         "sweetalert2": "^8.15.3",
         "vue-resource": "^1.5.1",
         "vue-router": "^3.1.2"

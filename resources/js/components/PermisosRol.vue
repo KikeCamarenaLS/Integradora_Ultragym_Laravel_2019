@@ -31,9 +31,9 @@
 				</table>
 			</div> <!-- fin div tabla -->
 		</div>
-		
+
 	</div><!-- Div principal-->
-	
+
 </template>
 
 <script>
@@ -50,7 +50,8 @@
 		},
 		created: function(){
 			this.getPermisos();
-			//this.datatable();
+			this.datatable();
+
 		},
 
 		methods:{
@@ -91,6 +92,9 @@
 				axios.get(urlPermisos).then( response =>{
 					this.ArrayPermisos = response.data
 				});
+				this.datatable();
+
+				//this.datatable();
 			},
 
 			NuevoPermiso: function(){
@@ -201,7 +205,7 @@
 			  },
 			  inputPlaceholder: 'Select a fruit',
 			  showCancelButton: true,
-			  
+
 			});
 			},
 		}
