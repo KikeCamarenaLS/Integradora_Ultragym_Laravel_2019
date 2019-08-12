@@ -25,6 +25,7 @@ Vue.component('roles-consulta' , require('./components/RolesComponent.vue').defa
 Vue.component('permisos-rol', require('./components/PermisosRol.vue').default);
 Vue.component('roles-permiso', require('./components/RolesPermisos.vue').default);
 Vue.component('listado-usuarios', require('./components/ListadoUsuarios.vue').default);
+Vue.component('nuevo-producto', require('./components/ProductosRegistro.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

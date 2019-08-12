@@ -15176,3 +15176,11 @@ a.text-dark:focus {
   }
 }
 
+.app-form > div {
+  margin-top: 1em;
+}
+
+.card.padding {
+  padding: 1em;
+}
+

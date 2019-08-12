@@ -129,3 +129,9 @@ Route::get('/roles-diferent-get/{idRol?}', 'ListadoRolesControler@diferentesRole
 Route::put('/change-rol', 'ListadoRolesControler@ModificarRol')->name('ModificarRol');
 
 Route::get('/get-Detalles-usuarios/{idUser?}', 'ListadoRolesControler@DetallesUsuario')->name('DetallesUsarioRol');
+
+//Productos
+
+Route::get('/productos', 'ProductsController@create');
+Route::post('/productos_store', 'ProductsController@store');
+Route::get('/productos/edit/{id?}','ProductsController@edit');
