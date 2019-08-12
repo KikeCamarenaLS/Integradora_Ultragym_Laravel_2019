@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Rutina extends Migration
+class Ejercicio extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class Rutina extends Migration
      */
     public function up()
     {
-        Schema::create('ejercicio', function (Blueprint $table) {
+        Schema::create('rutina', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->bigIncrements('id_ejercicio')->index();
-            $table->string('Nombre_Ejercicio');
-            $table->string('Descripcion');
-            $table->bigInteger('Serie');
-            $table->bigInteger('Repeticiones');
-            $table->string('Imagen');
+            $table->bigIncrements('id_rutina')->index();
+            $table->string('id_ejercicio');
+            $table->string('Nombre_rutina');
         });
     }
 

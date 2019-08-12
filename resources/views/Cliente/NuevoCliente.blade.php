@@ -2,7 +2,7 @@
 
 
 @section('content_header')
-<h4 class="page-title">Personal</h4>
+<h4 class="page-title">Cliente</h4>
 
 @stop
 
@@ -16,7 +16,7 @@
 		<div class="card"><!-- inicio de cuerpo card -->
 			<!-- Cabecera titulo -->
 			<div class="card-header">
-				<div class="card-title">Nueva Personal</div>
+				<div class="card-title">Nuevo Cliente</div>
 
 			</div><!-- fin cabecera   -->
 			<div class="card-body">
@@ -55,7 +55,7 @@
 							{{-- inicio del row --}}
 							<div class="form-group row " >
 								<div class="col-md-4">
-									<label>Correo Personal<span class="required-label" style="display: none;" name="co" id="co"> Repetido</span></label>
+									<label>Correo <span class="required-label" style="display: none;" name="co" id="co"> Repetido</span></label>
 									<input  type="email" class="form-control " id="Correo_Personal" name="Correo_Personal" placeholder="Correo Personal" onkeypress="validarCor()" onautocomplete="validarCor()">
 								</div>
 								<div class="col-md-4">
@@ -70,14 +70,8 @@
 							</div>
 							<div class="form-group row " >
 								<div class="col-md-4">
-									<label>Fecha Nacimiento</label>
-									<input  type="date" name="Fecha" class="form-control" id="Fecha" name="Fecha" onchange="validarFecha()">
-								</div>
-
-								<div class="col-md-4">
-									<label>Tipo</label>
+									<label>Tipo de usuario</label>
 									<select id="tUsuario" name="tUsuario" class="form-control" required onchange="validartus()">
-
 									</select>
 								</div>
 							</div>	
@@ -123,9 +117,8 @@
 		Telefono=document.getElementById('Telefono').value;
 		Contra=document.getElementById('Contra').value;
 		tUsuario=document.getElementById('tUsuario').value;
-		Fecha=document.getElementById('Fecha').value;
 
-		//alert("{{url('/nuevo_personal/registrar/')}}/"+Nombre+"/"+Ap+"/"+Am+"/"+Direccion+"/"+Correo+"/"+Telefono+"/"+Contra+"/"+tUsuario+"/"+Fecha);
+		//alert("{{url('/nuevo_cliente/registrar/')}}/"+Nombre+"/"+Ap+"/"+Am+"/"+Direccion+"/"+Correo+"/"+Telefono+"/"+Contra+"/"+tUsuario);
 		if (Nombre=="") {
 			mensaje("danger","Falta llenar el Nombre");
 			document.getElementById('Nombre').style.borderColor = "red"
@@ -153,10 +146,6 @@
 			mensaje("danger","Falta llenar el Contraseña");
 			document.getElementById('Contra').style.borderColor = "red"
 
-		}else if (Fecha==""){
-			mensaje("danger","Falta llenar el la Fecha");
-			document.getElementById('Fecha').style.borderColor = "red"
-
 		}else if (tUsuario==0){
 			mensaje("danger","Falta seleccionar el tipo de usuario");
 			document.getElementById('tUsuario').style.borderColor = "red"
@@ -169,11 +158,11 @@
 			document.getElementById('Correo_Personal').style.borderColor = "green";
 			document.getElementById('Telefono').style.borderColor = "green";
 			document.getElementById('Contra').style.borderColor = "green";
-			document.getElementById('Fecha').style.borderColor = "green";
+			//document.getElementById('Fecha').style.borderColor = "green";
 			document.getElementById('tUsuario').style.borderColor = "green";
 
 
-			$.get("{{url('/nuevo_personal/registrar/')}}/"+Nombre+"/"+Ap+"/"+Am+"/"+Direccion+"/"+Correo+"/"+Telefono+"/"+Contra+"/"+tUsuario+"/"+Fecha, function(data){
+			$.get("{{url('/nuevo_cliente/registrar/')}}/"+Nombre+"/"+Ap+"/"+Am+"/"+Direccion+"/"+Correo+"/"+Telefono+"/"+Contra+"/"+tUsuario, function(data){
 				console.log(data);
 				if (data == "success") {
 					mensaje("success","Se registro correctamente a: <b>"+Nombre+" "+Ap+" "+Am+" </b>");
@@ -201,7 +190,7 @@
 			document.getElementById('Correo_Personal').style.borderColor = "";
 			document.getElementById('Telefono').style.borderColor = "";
 			document.getElementById('Contra').style.borderColor = "";
-			document.getElementById('Fecha').style.borderColor = "";
+	//		document.getElementById('Fecha').style.borderColor = "";
 			document.getElementById('tUsuario').style.borderColor = "";
 		document.getElementById('Nombre').value="";
 		document.getElementById('Apellido_Paterno').value="";
@@ -211,7 +200,7 @@
 		document.getElementById('Telefono').value="";
 		document.getElementById('Contra').value="";
 		document.getElementById('tUsuario').value="0";
-		document.getElementById('Fecha').value="";
+	//	document.getElementById('Fecha').value="";
 
 	}
 	function validarN(){
@@ -248,31 +237,24 @@
 		}
 
 	}
-		function validartel(){
+	function validartel(){
 		Nombre=document.getElementById('Telefono').value;
 		if (Nombre != "") {
 			document.getElementById('Telefono').style.borderColor = "green";
 		}
 
 	}
-		function validarcontra(){
+	function validarcontra(){
 		Nombre=document.getElementById('Contra').value;
 		if (Nombre != "") {
 			document.getElementById('Contra').style.borderColor = "green";
 		}
 
 	}
-		function validartus(){
+	function validartus(){
 		Nombre=document.getElementById('tUsuario').value;
 		if (Nombre != "") {
 			document.getElementById('tUsuario').style.borderColor = "green";
-		}
-
-	}
-	function validarFecha(){
-		Nombre=document.getElementById('Fecha').value;
-		if (Nombre != "") {
-			document.getElementById('Fecha').style.borderColor = "green";
 		}
 
 	}

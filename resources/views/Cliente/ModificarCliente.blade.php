@@ -2,7 +2,7 @@
 
 
 @section('content_header')
-<h4 class="page-title">Personal</h4>
+<h4 class="page-title">Cliente</h4>
 
 @stop
 
@@ -16,7 +16,7 @@
 		<div class="card"><!-- inicio de cuerpo card -->
 			<!-- Cabecera titulo -->
 			<div class="card-header">
-				<div class="card-title">Modificar Personal</div>
+				<div class="card-title">Modificar Cliente</div>
 
 			</div><!-- fin cabecera   -->
 			<div class="card-body">
@@ -79,11 +79,6 @@
 									<label>Telefono</label>
 									<input  type="number" name="Telefono" min="10000000"  class="form-control" id="Telefono" name="Telefono" placeholder="Telefono " >
 								</div>
-								<div class="col-md-4">
-									<label>Fecha Nacimiento</label>
-									<input  type="date" name="Fecha" class="form-control" id="Fecha" name="Fecha" >
-								</div>
-							
 
 							</div>
 							
@@ -129,11 +124,10 @@
 		Direccion=document.getElementById('Direccion').value;
 		Correo=document.getElementById('Correo_Personal').value;
 		Telefono=document.getElementById('Telefono').value;
-		Fecha=document.getElementById('Fecha').value;
-		//alert("{{url('/nuevo_personal/registrar/')}}/"+Nombre+"/"+Ap+"/"+Am+"/"+Direccion+"/"+Correo+"/"+Telefono+"/"+Contra+"/"+tUsuario+"/"+Fecha);
+		//alert("{{url('/nuevo_personal/registrar/')}}/"+Nombre+"/"+Ap+"/"+Am+"/"+Direccion+"/"+Correo+"/"+Telefono+"/"+Contra+"/"+tUsuario);
 
 
-		$.get("{{url('/modificar_personal/modificar/')}}/"+id+"/"+Nombre+"/"+Ap+"/"+Am+"/"+Direccion+"/"+Correo+"/"+Telefono+"/"+Fecha, function(data){
+		$.get("{{url('/modificar_cliente/modificar/')}}/"+id+"/"+Nombre+"/"+Ap+"/"+Am+"/"+Direccion+"/"+Correo+"/"+Telefono, function(data){
 			console.log(data);
 			if (data == "success") {
 				mensaje("success","Se modifico correctamente a: <b>"+Nombre+" "+Ap+" "+Am+" </b>");
@@ -143,9 +137,6 @@
 				mensaje("danger","Ya existe un registro con el correo: "+Correo);
 				document.getElementById('Correo_Personal').value="";
 				document.getElementById('co').style.display = 'block';
-
-				
-
 			}
 			
 		});
@@ -158,9 +149,10 @@
 		document.getElementById('Direccion').value="";
 		document.getElementById('Correo_Personal').value="";
 		document.getElementById('Telefono').value="";
-		document.getElementById('Fecha').value="";
 		document.getElementById('NombreB').value="";
 		document.getElementById('modi').style.display = 'none';
+		document.getElementById('NombreB').disabled = '';
+
 
 
 	}
@@ -170,7 +162,7 @@ function buscar(){
         var Nombre= document.getElementById('NombreB').value;
         //alert("{{url('/Consulta/Personal')}}/"+Bienes+"/"+Marcas);
 
-        $.get("{{url('/Consulta/Personal')}}/"+Nombre, function(data){
+        $.get("{{url('/Consulta/Cliente')}}/"+Nombre, function(data){
           if (data == "No hay datos") {
             html="";
             mensaje("warning","Sin resultados");
@@ -181,31 +173,28 @@ function buscar(){
                     +' <thead class="bg-info" style=" overflow: 0;" ><tr>'
                     +'<th scope="col" style="color:white;">Nombre</th>'
                     +'<th scope="col" style="color:white;">Email</th>'
-                    +'<th scope="col" style="color:white;">Fecha Nacimiento</th>'
                     +'<th scope="col" style="color:white;">Direccion</th>'
                     +'<th scope="col" style="color:white;">Telefono</th>'
                     +'<th scope="col" style="color:white;">Eliminar</th>'
                     +'<th scope="col" style="color:white;">Editar</th></tr></thead>'
                     +'<tbody style=" overflow: auto;">';
           for(i=0; i<data.length; i++) {
-             var nombre="'"+data[i].name+"'";
-             var ap="'"+data[i].apellido_P+"'";
-             var am="'"+data[i].apellido_M+"'";
-             var ema="'"+data[i].email+"'";
-             var fn="'"+data[i].fecha_nacimiento+"'";
-             var dire="'"+data[i].direccion+"'";
-             var tel="'"+data[i].telefono+"'";
+             var nombre="'"+data[i].Nombre+"'";
+             var ap="'"+data[i].A_paterno+"'";
+             var am="'"+data[i].A_materno+"'";
+             var ema="'"+data[i].Correo+"'";
+             var dire="'"+data[i].Direccion+"'";
+             var tel="'"+data[i].Telefono+"'";
           html+='<tr>'+
-                      '<th scope="row">'+data[i].name+" "+data[i].apellido_P+" "+data[i].apellido_M+'</th>'+
-                      '<th scope="row">'+data[i].email+'</th>'+
-                      '<th scope="row">'+data[i].fecha_nacimiento+'</th>'+
-                      '<th scope="row">'+data[i].direccion+'</th>'+
-                      '<th scope="row">'+data[i].telefono+'</th>'+
-                      '<th><form action="{{ url('personal/eliminarRegistro') }}/'+data[i].id+'" method="POST">'+
+                      '<th scope="row">'+data[i].Nombre+" "+data[i].A_paterno+" "+data[i].A_materno+'</th>'+
+                      '<th scope="row">'+data[i].Correo+'</th>'+
+                      '<th scope="row">'+data[i].Direccion+'</th>'+
+                      '<th scope="row">'+data[i].Telefono+'</th>'+
+                      '<th><form action="{{ url('cliente/eliminarRegistro') }}/'+data[i].Id_persona+'" method="POST">'+
                       '@csrf'+
                       '{{method_field('DELETE')}}'+
                       '<button type="submit" class="btn btn-danger" onclick=" return confirm("Seguro que quieres eliminarlo")">Eliminar</button></form></th>'
-                      +'<th><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="buscarEd('+data[i].id+','+nombre+','+ap+','+am+','+ema+','+fn+','+dire+','+tel+')">Editar</button></th></tr> ';
+                      +'<th><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="buscarEd('+data[i].Id_persona+','+nombre+','+ap+','+am+','+ema+','+dire+','+tel+')">Editar</button></th></tr> ';
           }
           html+="</tbody></table>";
          
@@ -216,7 +205,8 @@ function buscar(){
 
 }
 
-	function buscarEd(id,nombre,ap,am,ema,fn,dire,tel){
+	function buscarEd(id,nombre,ap,am,ema,dire,tel){
+		document.getElementById('NombreB').disabled = 'true';
 		document.getElementById('modi').style.display = 'block';
 		document.getElementById('tabla').style.display = 'none';
 		 document.getElementById('id').value=id;
@@ -224,7 +214,6 @@ function buscar(){
 		 document.getElementById('Apellido_Paterno').value=ap;
 		 document.getElementById('Apellido_Materno').value=am;
 		 document.getElementById('Correo_Personal').value=ema;
-		 document.getElementById('Fecha').value=fn;
 		 document.getElementById('Direccion').value=dire;
 		 document.getElementById('Telefono').value=tel;
 	}
