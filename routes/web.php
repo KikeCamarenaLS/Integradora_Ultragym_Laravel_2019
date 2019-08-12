@@ -113,3 +113,5 @@ Route::get('/get-Detalles-usuarios/{idUser?}', 'ListadoRolesControler@DetallesUs
 //Productos
 
 Route::get('/productos', 'ProductsController@create');
+Route::post('/productos_store', 'ProductsController@store');
+Route::get('/productos/edit/{id?}','ProductsController@edit');

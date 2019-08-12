@@ -2,7 +2,7 @@
 
 
 @section('content_header')
-<h4 class="page-title">Subir productos</h4>
+<h4 class="page-title">Editar productos</h4>
 
 @stop
 

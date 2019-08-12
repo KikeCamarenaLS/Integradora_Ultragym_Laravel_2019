@@ -17,9 +17,13 @@ class Producto extends Migration
             $table->engine = 'InnoDB';
             $table->bigIncrements('id_producto')->index();
             $table->string('Nombre_Producto');
-            $table->string('Descripcion');
-            $table->bigInteger('Precio');
-            $table->bigInteger('Existencia');
+            $table->string('Descripcion')->nullable();
+            $table->bigInteger('Precio')->default(0);
+            $table->bigInteger('Existencia')->default(0);
+            $table->string('image_url')->nullable();
+
+            $table->timestamps();
+
         });
     }
 

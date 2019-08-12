@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class ProductsController extends Controller
 {
@@ -23,7 +24,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view(Productos.producto);
+        $product = new Product;
+        return view('Productos.producto', ["product" => $product]);
     }
 
     /**
@@ -35,6 +37,17 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         //Almacenar en la BD nuevos recursos
+        $options = [
+            'Nombre_Producto' => $request->title,
+            'Descripcion' => $request->description,
+            'Precio' => $request->price
+        ];
+
+        if(Product::create($options)){
+            return redirect('/');
+        }else{
+            return view('Productos.producto');
+        }
     }
 
     /**
@@ -56,7 +69,9 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::where('id_producto', $id)->get();
+        //return $product;
+        return view("Productos.productoEdit",["product" => $product]);
     }
 
     /**
