@@ -56,8 +56,8 @@
 	 var rep=[];
 	function buscar(){
 		var caja=document.getElementById('caja').value;
-
-		$.get("{{url('/cargar/card/rutina')}}/"+caja, function(data){
+		if(caja.length>0){
+			$.get("{{url('/cargar/card/rutina')}}/"+caja, function(data){
 			
 			if(data.length!=0){
 			 var html='<div class="container">'+
@@ -91,6 +91,8 @@
 		 }
       }); 
 
+		}
+		
 
 	}
 	function AgregarTabla(ids,nombre,serie,repe){
