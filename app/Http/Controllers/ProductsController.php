@@ -58,7 +58,27 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //Muestra un producto
+        $No_inventario = $request->Inventario;
+         $NombreProduct = $request->NombreProducto;
+        $DescripcionProduct = $request->DescripcionProducto ;
+        $PrecioProduct = $request->PrecioProducto ;
+
+        $fecha = date("Y-m-d_h_i_s");
+        $NombreFoto = $fecha."_".$NombreProduct."_".$PrecioProduct.".jpg";
+
+
+        $options = [
+            'Nombre_Producto' => $request->NombreProducto,
+            'Descripcion' => $request->DescripcionProducto,
+            'Precio' => $request->PrecioProducto,
+            //'image_url' => $NombreFoto
+        ];
+
+        Product::create($options);
+
+        $file = $request->file('Imagen');
+        $name = $file->getClientOriginalName();
+        $file->move(public_path().'/images/Productos/',$NombreFoto);
     }
 
     /**
@@ -71,7 +91,7 @@ class ProductsController extends Controller
     {
         $product = Product::where('id_producto', $id)->get();
         //return $product;
-        return view("Productos.productoEdit",["product" => $product]);
+        return view("Productos.productoEdit",["product" => $product ]);
     }
 
     /**

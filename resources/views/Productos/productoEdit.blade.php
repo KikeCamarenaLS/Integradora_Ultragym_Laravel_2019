@@ -16,7 +16,7 @@
 		<div class="card padding"><!-- inicio de cuerpo card -->
 			<!-- Cabecera titulo -->
 			<div class="card-header">
-				<div class="card-title">Productos</div>
+				<div class="card-title">Producto</div>
 
 			</div><!-- fin cabecera   -->
 			<div class="card-body">

@@ -22,13 +22,13 @@
 			<div class="card-body">
 				{{-- inicio del row --}}
 
-				<!-- 
+				 
 				<div id="app">
-					<listado-usuarios></listado-usuarios>
+					<nuevo-producto></nuevo-producto>
 				</div>
 				<script src="{{ asset('js/app.js') }}"></script>
-				-->
-				@include('Productos.productoForm')
+				
+				
 
 			</div><!-- fin cabecera   -->
 
