@@ -40,4 +40,7 @@ class RutinaController extends Controller
     	$mensaje='La rutina fue agregada correctamente';
     	 return view('Rutinas.NuevoEjercicio')->with(['mensaje' => 'La rutina fue agregada correctamente', 'color' => 'success']);
     }
+    public function registrarRutinaLista($id,$nombre){
+        DB::update('insert into rutina value(null,'.$id.',"'.$nombre.'")');
+    }
 }

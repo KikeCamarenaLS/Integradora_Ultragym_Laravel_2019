@@ -121,11 +121,24 @@
 		html+='<br><center><input type="submit" class="btn btn-primary" onclick="registrarRutina()"> </center><br><br>';
 
 		 $('#Resultados').html('');
+		 document.getElementById('caja').value="";
+		 mensaje('success','Ejercicio agregado a la lista');
 		 $('#tabla').html(html);
 		}
 
 	function registrarRutina(){
-		
+		var Nombre_Rutina = document.getElementById('Nombre_Rutina').value;
+		for (var i = 0; i < rep.length; i++) {
+			$.get("{{url('/agregar/rutina/lista')}}/"+id[i]+"/"+Nombre_Rutina, function(data){}); 
+		}
+		id.splice(0,rep.length);
+		nom.splice(0,rep.length);
+		ser.splice(0,rep.length);
+		rep.splice(0,rep.length);
+		 mensaje('success','Rutina registrada correctamente');
+		 $('#Resultados').html('');
+		 document.getElementById('caja').value="";
+		 $('#tabla').html("");
 	}
 
 
