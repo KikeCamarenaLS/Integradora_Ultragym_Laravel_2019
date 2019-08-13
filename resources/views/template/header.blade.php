@@ -353,12 +353,6 @@
                                                 <span class="sub-item">Registro de avances</span>
                                             </a>
                                         </li>
-
-                                         <li>
-                                            <a href="{{url('/Editar_Avances')}}">
-                                                <span class="sub-item">Editar</span>
-                                            </a>
-                                        </li>
                                         <li>
                                             <a href="{{url('/Editar_Avances')}}">
                                                 <span class="sub-item">Consultar</span>
