@@ -3,7 +3,7 @@
 		<div id="resultados-busqueda" style="">
 			<br>
 			<div class="col-lg-12 ml-auto mr-auto table-responsive" ><!-- Fin div tabla -->
-				<table class="table table-bordered table-bordered-bd-primary mt-4 table table-striped">
+				<table id="tablin" class="table table-bordered table-bordered-bd-primary mt-4 table table-striped" >
 					<thead class= "thead-dark">
 						<tr>
 							<th scope="col">#</th>
@@ -28,7 +28,7 @@
 										</span>
 										Cambiar Rol
 									</button>
-								</center>							
+								</center>
 							</td>
 							<td style="text-transform: uppercase;">
 								<center>
@@ -38,7 +38,7 @@
 										</span>
 										Ver detalles usuario
 									</button>
-								</center>							
+								</center>
 							</td>
 						</tr>
 					</tbody>
@@ -58,10 +58,10 @@
 						<h4 class="title4-long-responsive-section izq blue font-bold text-uppercase"> Detalles de usuario  </h4>
 						<!-- div columna 2 -->
 						<div id="columa-contenido" class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
-							
+
 							<div>
 								<div class="form-group row">
-									
+
 									<div class="col-md-12">
 										<label><b>Nombre :</b> </label>
 										<label name="firstname">{{ nombre }}</label>
@@ -114,7 +114,7 @@
 		</div>
 		<!--Modal: modalYT-->
 		</div>
-		
+
 	</div><!-- div principal -->
 </template>
 
@@ -148,9 +148,39 @@
 
 		created:function(){
 			this.getListado();
+			this.datatable();
 		},//fin created
 
 		methods:{
+
+			datatable: function(){
+				$(function(){
+					$('#tablin').DataTable({
+						scrollX:  false,
+				        scrollCollapse: true,
+				        filter: false,
+				        lengthMenu:   [[7, 14, 21, 28, 35, -1], [7, 14, 21, 28, 35, "Todos"]],
+				        iDisplayLength: 7,
+				        	"language" : {
+				            	"lengthMenu" : "Mostrar _MENU_ datos",
+				            	"zeroRecords" : "No existe el dato introducido",
+				            	"info" : "Página _PAGE_ de _PAGES_ ",
+				            	"infoEmpty" : "Sin datos disponibles",
+				            	"infoFiltered": "(mostrando los datos filtrados: _MAX_)",
+				            	"paginate" : {
+				             		"first": "Primero",
+				              		"last": "Ultimo",
+				              		"next": "Siguiente",
+				              		"previous": "Anterior"
+				            	},
+				            	"search": "Buscar",
+				            	"processing" : "Buscando...",
+				            	"loadingRecords" : "Cargando..."
+				        	}
+
+					});
+				});
+			},
 
 			getListado:function(){
 
@@ -158,6 +188,8 @@
 				axios.get(urlGetListado).then( response => {
 					this.ArrayListado = response.data
 				});
+
+
 			}, //fin getListado
 
 			ComboRoles:function(idUsuario, idRol){
@@ -172,7 +204,7 @@
 					this.ComboDetalles(idUsuario);
 				});
 
-				
+
 			}, //fin ComboRoles
 
 			ComboDetalles:function(idUsuario){
@@ -183,7 +215,7 @@
 		                options[o.id_Rol] = o.name;
 		            });
 
-		        
+
 
 				Swal.fire({
 				  title: 'Eliga un nuevo rol',
@@ -207,7 +239,7 @@
 			}, //fin ComboDetalles
 
 			modificarRol:function(idNuevoRol, idUsuario){
-				
+
 				var ModificarRol = '/change-rol';
 				axios.put(ModificarRol, {
 
@@ -243,13 +275,13 @@
 
 
 			DetalleUsuario:function(idUsuario){
-				
+
 				var UrlGetDetalles = '/get-Detalles-usuarios/'+idUsuario;
 				axios.get(UrlGetDetalles).then(response => {
 					this.ArrayDetalleUsuairo = response.data;
 					this.inicializacion();
 				});
-				
+
 			}, //fin DetalleUsuario
 
 			NotificacionSucces: function(mensaje){
@@ -275,7 +307,7 @@
 			}, //fin Notificacion succes
 
 			inicializacion:function(){
-				
+
 				this.nombre = this.ArrayDetalleUsuairo[0]["name"];
 				this.ApellidoP = this.ArrayDetalleUsuairo[0]["apellido_P"];
 				this.ApellidoM = this.ArrayDetalleUsuairo[0]["apellido_M"];
