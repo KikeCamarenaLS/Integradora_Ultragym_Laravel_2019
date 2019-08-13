@@ -140,3 +140,5 @@ Route::get('/productos_edit', 'ProductsController@indexProductsEdit');
 Route::get('/get_productos', 'ProductsController@getProductos');
 Route::get('/get_productos/json', 'ProductsController@getProductosJSON');
 Route::get('/get-Tipo/product', 'ProductsController@getTipos');
+Route::get('/get-Tipo/product/discart/{id?}', 'ProductsController@getTiposDiscard');
+Route::put('/edit-product/put', 'ProductsController@editarProducto');

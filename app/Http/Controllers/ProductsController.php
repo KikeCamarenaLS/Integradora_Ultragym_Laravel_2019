@@ -142,15 +142,15 @@ class ProductsController extends Controller
     public function getProductos()
     {
         $consulta = "select pr.id_producto, pr.Nombre_Producto, pr.Descripcion, pr.Precio, pr.Existencia, cp.Categoria, pr.image_url
-                    from producto pr INNER JOIN categoria_producto cp ON pr.id_categoria = cp.id_categoria";
+                    , cp.id_categoria from producto pr INNER JOIN categoria_producto cp ON pr.id_categoria = cp.id_categoria";
         $producto = DB::select($consulta);
         return $producto;
     }
 
     public function getProductosJSON()
     {
-        $consulta = "select pr.id_producto, pr.Nombre_Producto, pr.Descripcion, pr.Precio, pr.Existencia, cp.Categoria
-                    from producto pr INNER JOIN categoria_producto cp ON pr.id_categoria = cp.id_categoria";
+        $consulta = "select pr.id_producto, pr.Nombre_Producto, pr.Descripcion, pr.Precio, pr.Existencia, cp.Categoria,
+                    cp.id_categoria from producto pr INNER JOIN categoria_producto cp ON pr.id_categoria = cp.id_categoria";
         $producto = DB::select($consulta);
         return json_encode($producto);
     }
@@ -160,5 +160,16 @@ class ProductsController extends Controller
         $consulta = "select * from categoria_producto";
         $Tipo = DB::select($consulta);
         return $Tipo;
+    }
+
+    public function getTiposDiscard($id)
+    {
+        $consulta = "select * from categoria_producto where id_categoria != ".$id;
+        $Tipo = DB::select($consulta);
+        return $Tipo;
+    }
+
+    public function editarProducto(Request $request){
+
     }
 }

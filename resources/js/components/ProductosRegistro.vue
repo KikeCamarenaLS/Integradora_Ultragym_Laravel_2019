@@ -1,6 +1,6 @@
 <template>
 	<div>
-
+		<div>
 		<div class="form-group form-show-validation row">
 			<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Nombre de producto <span class="required-label">*</span></label>
 			<div class="col-lg-4 col-md-9 col-sm-8">
