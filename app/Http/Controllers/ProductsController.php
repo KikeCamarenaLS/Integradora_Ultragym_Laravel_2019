@@ -171,5 +171,24 @@ class ProductsController extends Controller
 
     public function editarProducto(Request $request){
 
+        $NombreProduct = $request->NombreProducto;
+        $DescripcionProduct = $request->DescripcionProducto ;
+        $PrecioProduct = $request->PrecioProducto ;
+        $IdCategoria = $request->IdTipo;
+        $Existencia = $request->ExistenciaProduct;
+        $IdProducto = $request->IdProducto;
+
+        $acualizar = "update producto set Nombre_Producto = '".$NombreProduct." ', Descripcion = '".$DescripcionProduct."' , Precio = ".$PrecioProduct." ,Existencia =  ".$Existencia." , id_categoria = ".$IdCategoria." where id_producto = ".$IdProducto;
+        DB::update($acualizar);
+
+    }
+
+    public function busquedaByName($nombre){
+
+
+        $consulta = "select pr.id_producto, pr.Nombre_Producto, pr.Descripcion, pr.Precio, pr.Existencia, cp.Categoria, pr.image_url
+                    , cp.id_categoria from producto pr INNER JOIN categoria_producto cp ON pr.id_categoria = cp.id_categoria where pr.Nombre_Producto = '".$nombre."'";
+        $producto = DB::select($consulta);
+        return $producto;
     }
 }

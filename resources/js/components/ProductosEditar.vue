@@ -1,12 +1,12 @@
 	<template>
 		<div>
 
-			<div class="form-group form-show-validation row">
-				<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Busqueda por nombre de producto: <span class="required-label">*</span></label>
-				<div class="col-lg-4 col-md-9 col-sm-8">
-					<input type="text" class="form-control" id="nombre_producto" name="nombre_producto" placeholder="Ingrese nombre de producto" required="">
-				</div>
-				<button class="btn btn-info" v-on:click="ObtenerDatos()">Buscar</button>
+
+			<div class="form-group">
+				<label for="nombre_producto_Busqueda" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Busqueda por nombre de producto: <span class="required-label">*</span></label>
+				<input type="text" class="form-control" id="nombre_producto_Busqueda" name="nombre_producto_Busqueda" placeholder="Ingrese nombre de producto" required="">
+				<button class="btn btn-info" v-on:click="PorNombre()">Buscar</button>
+				<button class="btn btn-info" v-on:click="Todos()">VerTodos</button>
 			</div>
 			<div class="seperator-solid"></div>
 			<div>
@@ -142,7 +142,7 @@
 
 				</div>
 
-				
+
 					<div class="card-body">
 
 						<div>
@@ -192,18 +192,6 @@
 					</select>
 				</div>
 			</div>
-
-
-			<div class="form-group form-show-validation row">
-				<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Imagen <span class="required-label">*</span></label>
-				<div class="col-lg-4 col-md-9 col-sm-8">
-					<div class="input-file input-file-image">
-						<img class="img-upload-preview img-circle" id="cargaImage" v-bind:src="Edit_Foto" alt="preview" width="100" height="100">
-						<input type="file" class="form-control form-control-file" id="uploadImg" name="uploadImg" accept="image/jpeg" required="" v-on:change="ValidarFoto()">
-						<label for="uploadImg" class=" label-input-file btn btn-icon btn-primary btn-round btn-lg"><i class="la la-file-image-o"></i> Subir imagen</label>
-					</div>
-				</div>
-			</div>
 		</div>
 
 					</div>
@@ -214,7 +202,7 @@
 							<input type="submit" v-on:click="Editar()" class="btn btn-primary" value="Actualizar">
 						</center>
 					</div>
-				
+
 			</div>
 		</div>
 	</div>
@@ -272,6 +260,9 @@
 				Nuevo_ValorFoto : "",
 				Nuevo_temporalFoto : "",
 				Nuevo_imagen : "",
+
+				ArrayBusqueda : [],
+				NombreBusqueda : "",
 			}
 
 		},//fin data
@@ -318,8 +309,8 @@
 
 				var urlProductos = '/get_productos';
 				axios.get(urlProductos).then( response => {
-					var table = $('#tabla_Productos').DataTable({});
-					table.destroy();
+					/*var table = $('#tabla_Productos').DataTable({});
+					table.destroy();*/
 					this.ArrayProducto = response.data
 				});
 
@@ -358,7 +349,7 @@
 			},
 
 			Editar:function(){
-				
+
 				this.Nuevo_NombreProducto = document.getElementById('nombre_producto_Edit').value;
 				this.Nuevo_PrecioProducto = document.getElementById('precio_producto').value;
 				this.Nuevo_DescripcionProducto = document.getElementById('descripcion_producto').value;
@@ -369,28 +360,19 @@
 
 			RealizarEdit:function(){
 
-				let formData = new FormData();
-				formData.append('Imagen', this.imagen);
-                //Enviamos la peticion
-                formData.append('NombreProducto', this.Nuevo_NombreProducto);
-                formData.append('DescripcionProducto', this.Nuevo_DescripcionProducto);
-                formData.append('PrecioProducto', this.Nuevo_PrecioProducto);
-                formData.append('IdTipo', this.Nuevo_CategoriaProducto);
-                formData.append('IdProducto', this.Edit_Id);
-
                 var urlEditProduct = '/edit-product/put';
-				axios.put(urlAlmacenar,
-					formData,
-					{ headers: {
-						'Content-Type': 'multipart/form-data'
-					}
-
-				},{
-					
+				axios.put(urlEditProduct,{
+					'NombreProducto' : this.Nuevo_NombreProducto,
+	                'DescripcionProducto' : this.Nuevo_DescripcionProducto,
+	                'PrecioProducto' : this.Nuevo_PrecioProducto,
+	                'IdTipo' : this.Nuevo_CategoriaProducto,
+	                'IdProducto' : this.Edit_Id,
+	                'ExistenciaProduct' : this.Nuevo_existencia,
 
 				}).then( response => {
 					this.limpiar();
 					this.NotificacionSucces("Se actualizo el producto con exito");
+					$('#modificarModal').modal('hide');
 				}).catch(function(error){
 					var placementFrom = 'top';
 					var placementAlign = 'center';
@@ -410,6 +392,44 @@
 						time: 1000,
 					});//fin notificacion
 				});
+			},
+
+			limpiar:function(){
+				this.ArrayProducto  = [];
+				this.NombreProducto  = "";
+				this.PrecioProducto  = "";
+				this.DescripcionProducto  = "";
+
+				this.ValorFoto  = "";
+				this.temporalFoto  = "";
+				this.imagen  = "";
+
+				this.Modal_Foto = "";
+				this.Modal_Producto = "";
+				this.Modal_Categoria = "";
+				this.Modal_descripcion  = "";
+				this.Modal_Precio  = "";
+				this.Modal_Existencia  = "";
+
+				this.Edit_Foto  = "";
+				this.Edit_Producto = "";
+				this.Edit_Categoria  = "";
+				this.Edit_Descripcion  = "";
+				this.Edit_Precio  = "";
+				this.Edit_Existencia  = "";
+				this.Edit_Id = "";
+				this.Edit_IdCategoria = "";
+
+				this.ArrayTipo = [];
+
+				this.Nuevo_NombreProducto  = "";
+				this.Nuevo_PrecioProducto  = "";
+				this.Nuevo_DescripcionProducto  = "";
+				this.Nuevo_CategoriaProducto  = "";
+				this.Nuevo_ValorFoto  = "";
+				this.Nuevo_temporalFoto  = "";
+				this.Nuevo_imagen  = "";
+				this.getProducts();
 			},
 
 			ValidarFoto:function(){
@@ -438,78 +458,66 @@
 				}
 			}, //Fin ValidarFoto
 
-			MensajeConfirmacion: function(){
-				swal({
-						title: '¿Listo para guardar?',
-						text: "No se podra revertir la acción",
-						type: 'warning',
-						buttons:{
-							confirm: {
-								text : 'Guardar',
-								className : 'btn btn-success'
-							},
-							cancel: {
-								visible: true,
-								text: 'Cancelar',
-								className: 'btn btn-danger'
-							}
-						}
-					}).then((Guardar) => {
-						if (Guardar) {
-							this.Almacenar();
-						} else {
-							swal.close();
+			PorNombre:function(){
+
+				this.NombreBusqueda = document.getElementById('nombre_producto_Busqueda').value;
+				this.BusquedaNombre();
+			},
+
+			BusquedaNombre: function(){
+
+				if( this.NombreBusqueda == null || this.NombreBusqueda == ""){
+					this.MensajeError("Ingrese un nombre para realizar la busqueda");
+				}else{
+					var urlBusquedaNombre = '/get-Producto-Nombre/'+this.NombreBusqueda;
+					axios.get(urlBusquedaNombre).then(response =>{
+
+						var resultado = response.data
+
+						if( resultado == 0){
+							var placementFrom = 'top';
+							var placementAlign = 'center';
+							var state = 'warning';
+							var style = 'withicon' ;
+							var content = {} ;
+
+							content.message = 'NO se encontraron resultados';
+							content.title = 'Error';
+							content.icon = 'la la-frown-o';
+							$.notify(content,{
+								type: state,
+								placement: {
+									from: placementFrom,
+									align: placementAlign
+								},
+								time: 1000,
+							});//fin notificacion
+						}else{
+							this.ArrayProducto = resultado;
 						}
 					});
+				}
 
-			},//fin mensajeConfirmacion
+				document.getElementById('nombre_producto_Busqueda').value = "";
 
-			Almacenar:function(){
 
-				//alert(this.NombreProducto);
-				//envio de imagen
-                let formData = new FormData();
-				formData.append('Imagen', this.imagen);
-                //Enviamos la peticion
-                formData.append('NombreProducto', this.NombreProducto);
-                formData.append('DescripcionProducto', this.DescripcionProducto);
-                formData.append('PrecioProducto', this.PrecioProducto);
+			},
 
-                var urlAlmacenar = '/productos_store';
-				axios.post(urlAlmacenar,
-					formData,
-					{ headers: {
-						'Content-Type': 'multipart/form-data'
-					}
+			Todos:function(){
+				this.ArrayProducto = [];
+				this.getProducts();
+			},
 
-				},{
-					'NombreProducto' : this.NombreProducto,
-                	'DescripcionProducto': this.DescripcionProducto,
-                	'PrecioProducto': this.DescripcionProducto,
-
-				}).then( response => {
-					this.limpiar();
-					this.NotificacionSucces("Se registro el producto con exito");
-				}).catch(function(error){
-					var placementFrom = 'top';
-					var placementAlign = 'center';
-					var state = 'danger';
-					var style = 'withicon' ;
-					var content = {} ;
-
-					content.message = 'Ocurrio un error, intente de nuevo porfavor'+error;
-					content.title = 'Error';
-					content.icon = 'la la-frown-o';
-					$.notify(content,{
-						type: state,
-						placement: {
-							from: placementFrom,
-							align: placementAlign
-						},
-						time: 1000,
-					});//fin notificacion
+			MensajeError:function(mensaje){
+				swal("Oops...", mensaje, {
+					icon : "error",
+					buttons: {
+						confirm: {
+							className : 'btn btn-danger'
+						}
+					},
 				});
-			},// finAlmacenar
+			},//fin mensaje error
 
 			NotificacionSucces: function(mensaje){
 
