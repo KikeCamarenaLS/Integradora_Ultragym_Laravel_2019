@@ -50,7 +50,15 @@ Route::get('/cargar/card/rutina/{caja?}','Gimnasio\Rutinas\RutinaController@most
 
 Route::get('/agregar/rutina/lista/{id?}/{nombre?}','Gimnasio\Rutinas\RutinaController@registrarRutinaLista')->name('aregistrarRutinaLista');
 
-Route::get('/ver_Rutinas','Gimnasio\Rutinas\RutinaController@vistaRegistrarRutina')->name('vistaRegistrarRutina');
+Route::get('/ver_Rutinas','Gimnasio\Rutinas\RutinaController@vistaVerRutina')->name('vistaVerRutinal');
+Route::get('/cargar/combo/Rutinas','Gimnasio\Rutinas\RutinaController@cargarComboRutina')->name('cargarComboRutinal');
+Route::get('/pintar/resultado/combo/Rutinas/{selec?}','Gimnasio\Rutinas\RutinaController@resultadoComboRutina')->name('resultadoComboRutinal');
+
+
+Route::get('/Editar_Rutinas','Gimnasio\Rutinas\RutinaController@verEditar_Rutinas')->name('verEditar_Rutinasl');
+
+
+
 
 
 
