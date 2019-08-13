@@ -328,7 +328,7 @@
 
                                     @can('Comprar')
                                         <li>
-                                            <a href="{{url('/ver_Tienda')}}">
+                                            <a href="{{url('/tienda')}}">
                                                 <span class="sub-item">Comprar</span>
                                             </a>
                                         </li>

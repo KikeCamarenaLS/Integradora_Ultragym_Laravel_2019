@@ -28,6 +28,9 @@ Vue.component('listado-usuarios', require('./components/ListadoUsuarios.vue').de
 Vue.component('nuevo-producto', require('./components/ProductosRegistro.vue').default);
 Vue.component('editar-producto', require('./components/ProductosEditar.vue').default);
 
+//Tienda
+Vue.component('tienda-online', require('./components/TiendaOnline.vue').default);
+Vue.component('componente-producto', require('./components/ComponenteProducto.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

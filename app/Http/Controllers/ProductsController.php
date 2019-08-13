@@ -159,6 +159,7 @@ class ProductsController extends Controller
     {
         $consulta = "select * from categoria_producto";
         $Tipo = DB::select($consulta);
+
         return $Tipo;
     }
 
