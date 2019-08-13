@@ -137,7 +137,7 @@
 					'<div class="card-footer">	'+
 						'<div class="form-group row " >'+
 							'<div class="col-md-12">'+
-								'<center><input  type="submit" class="btn btn-success" id="Repeticiones" name="Repeticiones" value="Actualizar"  >'+
+								'<center><input  type="submit" class="btn btn-success"  onclick="actualizarEjercicio('+Nombre_Ejercicio+','+Serie+','+Repeticiones+','+Descripcion+')"  value="Actualizar"  >'+
 								'</center>'+
 							'</div>'+
 						'</div>'+
@@ -147,6 +147,11 @@
 					$('#comboRutina').attr("disabled",true);
 
 
+		}
+		function actualizarEjercicio(Nombre_Ejercicio,Serie,Repeticiones,Descripcion){
+
+			$.get("{{url('/update/ejercicio')}}/"+Nombre_Ejercicio+"/"+Serie+"/"+Repeticiones+"/"+Descripcion, function(data){ });
+			this.mensaje('success','El ejercicio fue modificado correctamente');
 		}
 
 		function mensaje(color,mensaje){

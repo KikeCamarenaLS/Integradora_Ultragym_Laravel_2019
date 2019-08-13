@@ -24,6 +24,10 @@ class RutinaController extends Controller
         $mensaje='sin_mensaje';
         return view('Rutinas.EditarEjercicio',compact("color","mensaje"));
     }
+    
+    public function updateEjercicio($nom,$ser,$rep,$des){
+        DB::select('update ejercicio set Nombre_Ejercicio="'.$nom.'" and Descripcion="'.$des.'" and Serie="'.$ser.'" and Repeticiones="'.$rep.'"');
+    }
 
     public function cargarComboRutina(){
         $consulta=DB::select('SELECT DISTINCT nombre_rutina FROM rutina ');
