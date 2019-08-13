@@ -26,7 +26,10 @@ class RutinaController extends Controller
     }
     
     public function updateEjercicio($nom,$ser,$rep,$des){
-        DB::select('update ejercicio set Nombre_Ejercicio="'.$nom.'" and Descripcion="'.$des.'" and Serie="'.$ser.'" and Repeticiones="'.$rep.'"');
+        DB::select('update ejercicio set  Descripcion="'.$des.'" , Serie='.$ser.' , Repeticiones='.$rep.' where Nombre_Ejercicio="'.$nom.'" ');
+        $color='success';
+        $mensaje='El ejercicio fue modificado correctamente';
+        return view('Rutinas.EditarEjercicio',compact("color","mensaje"));
     }
 
     public function cargarComboRutina(){

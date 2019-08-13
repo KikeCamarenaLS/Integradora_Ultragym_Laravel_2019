@@ -103,6 +103,8 @@
 		}
 
 		function editarEjercicio(Nombre_Ejercicio,Imagen,Serie,Repeticiones,Descripcion){
+			
+
 			var html='<div class="form-group row " >'+
 						'<div class="col-md-4" >'+
 								'<label>Rutina <span class="required-label">*</span></label>'+
@@ -121,16 +123,19 @@
 					'<div class="form-group row " >'+
 							'<div class="col-md-6">'+
 								'<label>Descripcion<span class="required-label">*</span></label>'+
-								'<textarea class="form-control" id="Descripcion" name="Descripcion" value="'+Descripcion+'"  placeholder="Descripcion" ></textarea>'+
+								'<textarea class="form-control" id="Descripcion" name="Descripcion"   placeholder="Descripcion" >'+Descripcion+'</textarea>'+
 							'</div>'+
 							'<div class="col-md-6">'+
 								'<div class="input-file input-file-image">'+
-									'<img class="img-upload-preview" width="150" src="http://integradora_ultragym_laravel_2019.test/images/FotosRutinas/'+Imagen+'" alt="preview">'+
+									'<img class="img-upload-preview" width="150" src="http://integradora_ultragym_laravel_2019.test/images/FotosRutinas/'+Imagen+'" alt="preview">';
 
 									// '<input type="file" class="form-control form-control-file" id="uploadImg2" name="uploadImg2" accept="image/jpeg" required="">'+
 									// '<label for="uploadImg2" class=" label-input-file btn btn-icon btn-default btn-round btn-lg"><i class="la la-file-image-o"></i> Cargar una Imagen</label>'+
-
-								'</div>'+
+ var Nombre_Ejercicio="'"+Nombre_Ejercicio+"'";
+			var Serie="'"+Serie+"'";
+			var Repeticiones="'"+Repeticiones+"'";
+			var Descripcion="'"+Descripcion+"'";
+								 html+='</div>'+
 							'</div>'+
 						'</div>'+
 					'</div><!-- fin cabecera   -->'+
@@ -149,9 +154,15 @@
 
 		}
 		function actualizarEjercicio(Nombre_Ejercicio,Serie,Repeticiones,Descripcion){
-
+				var Serie=document.getElementById('Serie').value;
+				var Repeticiones=document.getElementById('Repeticion').value;
+				var Descripcion=document.getElementById('Descripcion').value;
 			$.get("{{url('/update/ejercicio')}}/"+Nombre_Ejercicio+"/"+Serie+"/"+Repeticiones+"/"+Descripcion, function(data){ });
 			this.mensaje('success','El ejercicio fue modificado correctamente');
+			this.comboRutina();
+			$('#pintarResultado').html("");
+					$('#comboRutina').attr("disabled",false);
+
 		}
 
 		function mensaje(color,mensaje){
