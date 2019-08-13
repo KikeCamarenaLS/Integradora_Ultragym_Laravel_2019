@@ -117,6 +117,15 @@ Route::get('/Consultar_Cliente','ClienteController@vistaCliente')->name('vistaCl
 
 //Fin clientes
 
+//Avances
+Route::get('/registrar_avance','AvancesController@VistaAvances')->name('VistaAvances');//Vista Registrar
+Route::get('/nuevo_avance/registrar/{id?}/{peso?}/{altura?}/{imc?}/{pgb?}/{pga?}/{pgp?}','AvancesController@RegistrarAvance')->name('RegistrarAvance');//Guardar Personal
+
+
+
+
+//Fin Avances
+
 
 //Roles
 Route::get('/Roles','RolesController@vistaRoles')->name('vistaRoles');
@@ -148,3 +157,11 @@ Route::get('/get-Detalles-usuarios/{idUser?}', 'ListadoRolesControler@DetallesUs
 Route::get('/productos', 'ProductsController@create');
 Route::post('/productos_store', 'ProductsController@store');
 Route::get('/productos/edit/{id?}','ProductsController@edit');
+
+Route::get('/productos_edit', 'ProductsController@indexProductsEdit');
+Route::get('/get_productos', 'ProductsController@getProductos');
+Route::get('/get_productos/json', 'ProductsController@getProductosJSON');
+Route::get('/get-Tipo/product', 'ProductsController@getTipos');
+Route::get('/get-Tipo/product/discart/{id?}', 'ProductsController@getTiposDiscard');
+Route::put('/edit-product/put', 'ProductsController@editarProducto');
+Route::get('/get-Producto-Nombre/{Nombre?}', 'ProductsController@busquedaByName');

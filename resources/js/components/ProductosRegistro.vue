@@ -1,6 +1,6 @@
 <template>
 	<div>
-		
+		<div>
 		<div class="form-group form-show-validation row">
 			<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Nombre de producto <span class="required-label">*</span></label>
 			<div class="col-lg-4 col-md-9 col-sm-8">
@@ -11,8 +11,8 @@
 			<label for="descripcion" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Descripción de producto <span class="required-label">*</span></label>
 			<div class="col-lg-4 col-md-9 col-sm-8">
 				<textarea class="form-control" id="descripcion_producto" name="descripcion_producto" required="">
-					
-				</textarea> 
+
+				</textarea>
 			</div>
 		</div>
 
@@ -23,16 +23,26 @@
 					<span class="input-group-text">$</span>
 					<input type="number" step="0.01" id="precio_producto" name="precio_producto" class="form-control" aria-label="Amount (to the nearest dollar)">
 				</div>
-				
+
 			</div>
 		</div>
-		
+
+		<div class="form-group form-show-validation row">
+			<label for="CategoriaProducto" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Categoria del producto: <span class="required-label">*</span></label>
+			<div class="col-lg-4 col-md-9 col-sm-8">
+				<select class="form-control input-pill" id="CategoriaProducto">
+					<option value="Sin">Seleccione uno</option>
+					<option v-for="(tipo,index) in ArrayTipo" v-bind:value=" tipo.id_categoria ">{{ tipo.Categoria }}</option>
+				</select>
+			</div>
+		</div>
+
 
 		<div class="form-group form-show-validation row">
 			<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Imagen <span class="required-label">*</span></label>
 			<div class="col-lg-4 col-md-9 col-sm-8">
 				<div class="input-file input-file-image">
-					<img class="img-upload-preview img-circle" src="/images/default.png" alt="preview" width="100" height="100">
+					<img class="img-upload-preview img-circle" id="cargaImage" src="/images/default.png" alt="preview" width="100" height="100">
 					<input type="file" class="form-control form-control-file" id="uploadImg" name="uploadImg" accept="image/jpeg" required="" v-on:change="ValidarFoto()">
 					<label for="uploadImg" class=" label-input-file btn btn-icon btn-primary btn-round btn-lg"><i class="la la-file-image-o"></i> Subir imagen</label>
 				</div>
@@ -43,15 +53,15 @@
 			<center>
 				<button class="btn btn-success" v-on:click="ObtenerDatos()">Guardar</button>
 			</center>
-								
-			
+
+
 		</div>
 	</div>
 </div>
 </template>
 
 <script>
-	
+
 	import axios from 'axios'
 	import Swal from 'sweetalert2'
 
@@ -60,9 +70,12 @@
 		data(){
 
 			return{
+
+				ArrayTipo : [],
 				NombreProducto : "",
 				PrecioProducto : "",
 				DescripcionProducto : "",
+				CategoriaProducto : "",
 
 				ValorFoto : "",
 				temporalFoto : "",
@@ -71,19 +84,34 @@
 
 		},//fin data
 
+		created: function(){
+			this.getTipo();
+			//this.datatable();
+			//this.datatable();
+		},
+
 		methods:{
+
+			getTipo:function(){
+
+				var UrlTipoGet = '/get-Tipo/product';
+				axios.get(UrlTipoGet).then(response => {
+					this.ArrayTipo = response.data
+				});
+			},
 
 			ObtenerDatos:function(){
 
 				this.NombreProducto = document.getElementById('nombre_producto').value;
 				this.PrecioProducto = document.getElementById('precio_producto').value;
 				this.DescripcionProducto = document.getElementById('descripcion_producto').value;
+				this.CategoriaProducto = document.getElementById('CategoriaProducto').value;
 				this.Validacion();
 			}, //fin ObtenerDatos
 
 			Validacion:function(){
 
-				if(this.NombreProducto == ""){
+				if(this.NombreProducto == "" || this.NombreProducto == null){
 					this.MensajeError("Falta ingresar el nombre del producto");
 
 				}else if(this.PrecioProducto == ""){
@@ -94,6 +122,8 @@
 
 				}else if(this.ValorFoto == ""){
 					this.MensajeError("Falta seleccionar una foto");
+				}else if(this.CategoriaProducto == "Sin"){
+					this.MensajeError("Seleccione una opción valida para la categoria del producto");
 				}else{
 					this.MensajeConfirmacion();
 				}
@@ -164,13 +194,15 @@
 
 			Almacenar:function(){
 
+				//alert(this.NombreProducto);
 				//envio de imagen
                 let formData = new FormData();
 				formData.append('Imagen', this.imagen);
                 //Enviamos la peticion
                 formData.append('NombreProducto', this.NombreProducto);
                 formData.append('DescripcionProducto', this.DescripcionProducto);
-                formData.append('PrecioProducto', this.DescripcionProducto);
+                formData.append('PrecioProducto', this.PrecioProducto);
+                formData.append('IdTipo', this.CategoriaProducto);
 
                 var urlAlmacenar = '/productos_store';
 				axios.post(urlAlmacenar,
@@ -216,6 +248,15 @@
 				this.ValorFoto = "";
 				this.temporalFoto = "";
 				this.imagen = "";
+
+				document.getElementById('nombre_producto').value = "";
+				document.getElementById('precio_producto').value= "" ;
+				document.getElementById('descripcion_producto').value= "";
+				document.getElementById('uploadImg').value = "";
+				document.getElementById('cargaImage').src = "/images/default.png";
+				document.getElementById('CategoriaProducto').selectedIndex = "0";
+
+
 			}, //fin limpiar
 
 			NotificacionSucces: function(mensaje){

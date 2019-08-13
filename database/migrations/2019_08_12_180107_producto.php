@@ -21,7 +21,8 @@ class Producto extends Migration
             $table->bigInteger('Precio')->default(0);
             $table->bigInteger('Existencia')->default(0);
             $table->string('image_url')->nullable();
-
+            $table->bigInteger('id_categoria')->unsigned();
+            $table->foreign('id_categoria')->references('id_categoria')->on('categoria_producto');
             $table->timestamps();
 
         });

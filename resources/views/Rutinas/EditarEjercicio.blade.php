@@ -126,8 +126,10 @@
 							'<div class="col-md-6">'+
 								'<div class="input-file input-file-image">'+
 									'<img class="img-upload-preview" width="150" src="http://integradora_ultragym_laravel_2019.test/images/FotosRutinas/'+Imagen+'" alt="preview">'+
+
 									// '<input type="file" class="form-control form-control-file" id="uploadImg2" name="uploadImg2" accept="image/jpeg" required="">'+
 									// '<label for="uploadImg2" class=" label-input-file btn btn-icon btn-default btn-round btn-lg"><i class="la la-file-image-o"></i> Cargar una Imagen</label>'+
+
 								'</div>'+
 							'</div>'+
 						'</div>'+

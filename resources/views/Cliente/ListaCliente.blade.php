@@ -75,8 +75,7 @@ function buscar(){
                     +'<th scope="col" style="color:white;">Email</th>'
                     +'<th scope="col" style="color:white;">Direccion</th>'
                     +'<th scope="col" style="color:white;">Telefono</th>'
-                    +'<th scope="col" style="color:white;">Eliminar</th>'
-                    +'<th scope="col" style="color:white;">Editar</th></tr></thead>'
+                    +'</tr></thead>'
                     +'<tbody style=" overflow: auto;">';
           for(i=0; i<data.length; i++) {
              var nombre="'"+data[i].Nombre+"'";
