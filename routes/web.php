@@ -104,6 +104,15 @@ Route::get('/Consultar_Cliente','ClienteController@vistaCliente')->name('vistaCl
 
 //Fin clientes
 
+//Avances
+Route::get('/registrar_avance','AvancesController@VistaAvances')->name('VistaAvances');//Vista Registrar
+Route::get('/nuevo_avance/registrar/{id?}/{peso?}/{altura?}/{imc?}/{pgb?}/{pga?}/{pgp?}','AvancesController@RegistrarAvance')->name('RegistrarAvance');//Guardar Personal
+
+
+
+
+//Fin Avances
+
 
 //Roles
 Route::get('/Roles','RolesController@vistaRoles')->name('vistaRoles');

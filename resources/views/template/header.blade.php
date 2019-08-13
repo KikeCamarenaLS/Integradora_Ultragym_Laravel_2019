@@ -354,7 +354,7 @@
 
                                     @can('GestionarAvances')
                                         <li>
-                                            <a href="{{url('/ver_Avances')}}">
+                                            <a href="{{url('/registrar_avance')}}">
                                                 <span class="sub-item">Registro de avances</span>
                                             </a>
                                         </li>
