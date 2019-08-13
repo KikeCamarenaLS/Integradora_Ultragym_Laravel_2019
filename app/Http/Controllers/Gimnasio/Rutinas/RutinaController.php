@@ -14,6 +14,26 @@ class RutinaController extends Controller
     	$mensaje='sin_mensaje';
     	return view('Rutinas.NuevaRutina',compact("color","mensaje"));
     }
+    public function vistaVerRutina(){
+        $color='danger';
+        $mensaje='sin_mensaje';
+        return view('Rutinas.VerRutinas',compact("color","mensaje"));
+    }
+    public function verEditar_Rutinas(){
+        $color='danger';
+        $mensaje='sin_mensaje';
+        return view('Rutinas.VerRutinas',compact("color","mensaje"));
+    }
+
+    public function cargarComboRutina(){
+        $consulta=DB::select('SELECT DISTINCT nombre_rutina FROM rutina ');
+        return $consulta;
+    }
+    public function resultadoComboRutina($selec){
+        $consulta=DB::select('SELECT * FROM ejercicio INNER JOIN rutina ON ejercicio.id_ejercicio=rutina.id_ejercicio WHERE rutina.Nombre_rutina="'.$selec.'"');
+        return $consulta;
+    }
+
     public function vistaRegistrarEjercicio(){
         $color='danger';
         $mensaje='sin_mensaje';
@@ -39,5 +59,8 @@ class RutinaController extends Controller
 		$color='success';
     	$mensaje='La rutina fue agregada correctamente';
     	 return view('Rutinas.NuevoEjercicio')->with(['mensaje' => 'La rutina fue agregada correctamente', 'color' => 'success']);
+    }
+    public function registrarRutinaLista($id,$nombre){
+        DB::update('insert into rutina value(null,'.$id.',"'.$nombre.'")');
     }
 }

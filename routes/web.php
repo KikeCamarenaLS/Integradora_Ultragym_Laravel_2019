@@ -48,6 +48,19 @@ Route::post('/RegistrarRutina','Gimnasio\Rutinas\RutinaController@registrarRutin
 Route::get('/nuevoEjercicio', 'Gimnasio\Rutinas\RutinaController@vistaRegistrarEjercicio')->name('vistaRegistrarEjercicio');
 Route::get('/cargar/card/rutina/{caja?}','Gimnasio\Rutinas\RutinaController@mostrarCardRutina')->name('jmostrarCardRutina');
 
+Route::get('/agregar/rutina/lista/{id?}/{nombre?}','Gimnasio\Rutinas\RutinaController@registrarRutinaLista')->name('aregistrarRutinaLista');
+
+Route::get('/ver_Rutinas','Gimnasio\Rutinas\RutinaController@vistaVerRutina')->name('vistaVerRutinal');
+Route::get('/cargar/combo/Rutinas','Gimnasio\Rutinas\RutinaController@cargarComboRutina')->name('cargarComboRutinal');
+Route::get('/pintar/resultado/combo/Rutinas/{selec?}','Gimnasio\Rutinas\RutinaController@resultadoComboRutina')->name('resultadoComboRutinal');
+
+
+Route::get('/Editar_Rutinas','Gimnasio\Rutinas\RutinaController@verEditar_Rutinas')->name('verEditar_Rutinasl');
+
+
+
+
+
 
 //fin ejercicios
 
@@ -144,3 +157,11 @@ Route::get('/get-Detalles-usuarios/{idUser?}', 'ListadoRolesControler@DetallesUs
 Route::get('/productos', 'ProductsController@create');
 Route::post('/productos_store', 'ProductsController@store');
 Route::get('/productos/edit/{id?}','ProductsController@edit');
+
+Route::get('/productos_edit', 'ProductsController@indexProductsEdit');
+Route::get('/get_productos', 'ProductsController@getProductos');
+Route::get('/get_productos/json', 'ProductsController@getProductosJSON');
+Route::get('/get-Tipo/product', 'ProductsController@getTipos');
+Route::get('/get-Tipo/product/discart/{id?}', 'ProductsController@getTiposDiscard');
+Route::put('/edit-product/put', 'ProductsController@editarProducto');
+Route::get('/get-Producto-Nombre/{Nombre?}', 'ProductsController@busquedaByName');

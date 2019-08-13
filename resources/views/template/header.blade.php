@@ -243,7 +243,7 @@
                             </a>
                             <div class="collapse" id="Paquetes_collapse">
                                 <ul class="nav nav-collapse">
-                        
+
 
                                     @can('GestionarPaquetes')
                                         <li>
@@ -320,13 +320,8 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{url('/ver_Tienda')}}">
+                                            <a href="{{url('/productos_edit')}}">
                                                 <span class="sub-item">Ver</span>
-                                            </a>
-                                        </li>
-                                         <li>
-                                            <a href="{{url('/Editar_Tienda')}}">
-                                                <span class="sub-item">Editar</span>
                                             </a>
                                         </li>
                                     @endcan

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use Schema;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -41,9 +43,10 @@ class ProductsController extends Controller
         $NombreProduct = $request->NombreProducto;
         $DescripcionProduct = $request->DescripcionProducto ;
         $PrecioProduct = $request->PrecioProducto ;
+        $IdCategoria = $request->IdTipo;
 
         $fecha = date("Y-m-d_h_i_s");
-        $NombreFoto = $fecha."_".$NombreProduct."_".$PrecioProduct.".jpg";
+        $NombreFoto = $fecha."_".$IdCategoria."_".$NombreProduct."_".$PrecioProduct.".jpg";
 
         $product = new Product();
 
@@ -51,6 +54,7 @@ class ProductsController extends Controller
         $product->Descripcion = $DescripcionProduct;
         $product->Precio = $PrecioProduct;
         $product->image_url = $NombreFoto;
+        $product->id_categoria = $IdCategoria;
 
         $product->save();
 
@@ -128,5 +132,63 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function indexProductsEdit()
+    {
+        return view('Productos.productoEdit');
+    }
+
+    public function getProductos()
+    {
+        $consulta = "select pr.id_producto, pr.Nombre_Producto, pr.Descripcion, pr.Precio, pr.Existencia, cp.Categoria, pr.image_url
+                    , cp.id_categoria from producto pr INNER JOIN categoria_producto cp ON pr.id_categoria = cp.id_categoria";
+        $producto = DB::select($consulta);
+        return $producto;
+    }
+
+    public function getProductosJSON()
+    {
+        $consulta = "select pr.id_producto, pr.Nombre_Producto, pr.Descripcion, pr.Precio, pr.Existencia, cp.Categoria,
+                    cp.id_categoria from producto pr INNER JOIN categoria_producto cp ON pr.id_categoria = cp.id_categoria";
+        $producto = DB::select($consulta);
+        return json_encode($producto);
+    }
+
+    public function getTipos()
+    {
+        $consulta = "select * from categoria_producto";
+        $Tipo = DB::select($consulta);
+        return $Tipo;
+    }
+
+    public function getTiposDiscard($id)
+    {
+        $consulta = "select * from categoria_producto where id_categoria != ".$id;
+        $Tipo = DB::select($consulta);
+        return $Tipo;
+    }
+
+    public function editarProducto(Request $request){
+
+        $NombreProduct = $request->NombreProducto;
+        $DescripcionProduct = $request->DescripcionProducto ;
+        $PrecioProduct = $request->PrecioProducto ;
+        $IdCategoria = $request->IdTipo;
+        $Existencia = $request->ExistenciaProduct;
+        $IdProducto = $request->IdProducto;
+
+        $acualizar = "update producto set Nombre_Producto = '".$NombreProduct." ', Descripcion = '".$DescripcionProduct."' , Precio = ".$PrecioProduct." ,Existencia =  ".$Existencia." , id_categoria = ".$IdCategoria." where id_producto = ".$IdProducto;
+        DB::update($acualizar);
+
+    }
+
+    public function busquedaByName($nombre){
+
+
+        $consulta = "select pr.id_producto, pr.Nombre_Producto, pr.Descripcion, pr.Precio, pr.Existencia, cp.Categoria, pr.image_url
+                    , cp.id_categoria from producto pr INNER JOIN categoria_producto cp ON pr.id_categoria = cp.id_categoria where pr.Nombre_Producto = '".$nombre."'";
+        $producto = DB::select($consulta);
+        return $producto;
     }
 }
