@@ -31,6 +31,8 @@
 					
 				</div>
 			</div>
+			<center><div id="Alerta" name="Alerta"></div></center>
+			
 
 			<div class="card-body" name="regi" id="regi" style="display: none">
 				{{-- inicio del row --}}
@@ -59,6 +61,7 @@
 								<div class="col-md-2 ml-auto mr-auto">
 									<label>IMC</label>
 									<input required="" disabled="" type="number" class="form-control" id="IMC" name="IMC" placeholder="IMC" onkeypress="validarAm()" onkeyup="validarAm()">
+								
 								</div>
 								<div class="col-md-2 ml-auto mr-auto">
 									<label>% de Grasa de los brazos</label>
@@ -72,6 +75,7 @@
 									<label>% de Grasa de las pierna</label>
 									<input  type="number" class="form-control" id="pgp" name="pgp" placeholder="porcentaje "  onkeypress="validartel()" onkeyup="validartel()">
 								</div>
+								
 							</div>
 							</CENTER>
 							{{-- fin del row --}}
@@ -123,6 +127,85 @@
 			//(60 kg)/(1,69 m)² ≈ 21
 			var IMC = (peso/(altura*altura));
 			document.getElementById('IMC').value = IMC;
+			var pesoc="";
+			var categoria="";
+			var icono="";
+			var color="";
+
+
+			if (IMC < 16) {
+				//bajo de peso
+				categoria="Delgadez Cevera";
+				pesoc="Bajo peso";
+				icono='la la-frown-o';
+				color="danger";
+			}else if(IMC >= 16 && IMC <= 17){
+				categoria="Delgadez Moderada";
+				pesoc="Bajo peso";
+				icono='la la-frown-o';
+				color="danger";
+
+			}else if(IMC >=17 && IMC <= 18.5){
+				categoria="Delgadez Leve";
+				pesoc="Bajo peso";
+				icono='la la-frown-o';
+				color="danger";
+
+			}else if(IMC >=18.5 && IMC <= 24.9){
+				categoria="Peso Normal";
+				pesoc="Peso normal";
+				icono='la la-smile-o';
+				color="success";
+
+			}else if(IMC >=25 && IMC <= 29.9){
+				categoria="Pre-Obeso";
+				pesoc="Sobrepeso";
+				icono='la la-frown-o';
+				color="danger";
+
+			}else if(IMC >=30 && IMC <= 34.9){
+				categoria="Obesidad Tipo I";
+				pesoc="Obesidad";
+				icono='la la-frown-o';
+				color="danger";
+
+			}else if(IMC >=35 && IMC <= 39.9){
+				categoria="Obesidad Tipo II";
+				pesoc="Obesidad";
+				icono='la la-frown-o';
+				color="danger";
+
+			}else if(IMC >= 40){
+				categoria="Obesidad Tipo II";
+				pesoc="Obesidad";
+				icono='la la-frown-o';
+				color="danger";
+
+			}
+			document.getElementById('Alerta').style.display="block";
+
+			var html='<div class="col-sm-6 col-md-3">'
+							+'<div class="card card-stats card-round">'
+								+'<div class="card-body">'
+								+'	<div class="row">'
+									+'	<div class="col-5">'
+									+'		<div class="icon-big text-center icon-'+color+'">'
+										+'		<i class="'+icono+' text-'+color+'"></i>'
+									+'		</div>'
+									+'	</div>'
+									+'	<div class="col-7 col-stats">'
+									+'		<div class="numbers">'
+									+'			<p class="card-category">'+categoria+'</p>'
+									+'			<h4 class="card-title">'+pesoc+'</h4>'
+									+'		</div>'
+									+'	</div>'
+								+'	</div>'
+							+'	</div>'
+						+'	</div>'
+					+'	</div>'
+
+
+				$('#Alerta').html(html);
 
 		}
 	}
@@ -205,6 +288,7 @@
 		document.getElementById('tabla').style.display="block";
 		document.getElementById('regi').style.display="none";
 		document.getElementById('NombreB').disabled="";
+		document.getElementById('Alerta').style.display="none";
 
 	}
 
