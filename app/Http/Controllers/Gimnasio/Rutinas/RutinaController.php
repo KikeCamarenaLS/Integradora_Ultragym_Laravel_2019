@@ -22,7 +22,7 @@ class RutinaController extends Controller
     public function verEditar_Rutinas(){
         $color='danger';
         $mensaje='sin_mensaje';
-        return view('Rutinas.VerRutinas',compact("color","mensaje"));
+        return view('Rutinas.EditarEjercicio',compact("color","mensaje"));
     }
 
     public function cargarComboRutina(){
