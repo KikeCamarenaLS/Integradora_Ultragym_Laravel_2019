@@ -17,4 +17,14 @@ class AvancesController extends Controller
     	return $mensaje;
 
     }
+    public function VistaCAvances(){
+    	return view('Avances.ConsultarAvances');
+    }
+
+    public function ConsultaAvances($id=""){
+    	$avances = DB::select('select * from 
+                    historialsalud where id_persona ='.$id.'');
+    	return $avances;
+
+    }
 }

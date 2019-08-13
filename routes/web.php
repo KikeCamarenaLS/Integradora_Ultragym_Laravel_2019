@@ -120,6 +120,8 @@ Route::get('/Consultar_Cliente','ClienteController@vistaCliente')->name('vistaCl
 //Avances
 Route::get('/registrar_avance','AvancesController@VistaAvances')->name('VistaAvances');//Vista Registrar
 Route::get('/nuevo_avance/registrar/{id?}/{peso?}/{altura?}/{imc?}/{pgb?}/{pga?}/{pgp?}','AvancesController@RegistrarAvance')->name('RegistrarAvance');//Guardar Personal
+Route::get('/Consultar_Avances','AvancesController@VistaCAvances')->name('VistaCAvances');//Vista Registrar
+Route::get('/Consulta/Avances/{id?}','AvancesController@ConsultaAvances')->name('ConsultaAvances');//Guardar Personal
 
 
 
