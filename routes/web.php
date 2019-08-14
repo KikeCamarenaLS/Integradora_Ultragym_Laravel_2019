@@ -14,11 +14,33 @@
 
 Route::get('/', 'PrincipalController@indexView')->name('indexRoute');
 Route::get('/principal', 'PrincipalController@indexView')->name('indexRou');
+Route::post('/principal', 'PrincipalController@store')->name('principal.store');
+Route::get('/principal/Cupones','PrincipalController@ConsultaPersonalPDF')->name('DescargarPDF');
+
+Route::get('/home', 'UsuarioController@principal')->name('usuarioPrincipal');
+
+//Login
+Route::post('/principal/Verifica','PrincipalController@Login')->name('principal.Login');
+
+
+Route::get('/registro', function () {
+    return view('Index/registro');
+});
+
+
+
+//hasta aqui carm,ociinternaldebug
+
+Route::get('/registro', function () {
+    return view('Index/registro');
+});
+
 Auth::routes();
+
 
 Route::group(['middleware' => 'auth'], function () {
 
-Route::get('/principal/Cupones','PrincipalController@ConsultaPersonalPDF')->name('DescargarPDF');
+
 
 
 
@@ -72,26 +94,10 @@ Route::get('/update/ejercicio/{nom?}/{ser?}/{rep?}/{des?}','Gimnasio\Rutinas\Rut
 
 
 
-Route::get('/home', 'UsuarioController@principal')->name('usuarioPrincipal');
-
-//Login
-Route::post('/principal/Verifica','PrincipalController@Login')->name('principal.Login');
-
-
-Route::get('/registro', function () {
-    return view('Index/registro');
-});
 
 
 
-//hasta aqui carm,ociinternaldebug
 
-Route::get('/registro', function () {
-    return view('Index/registro');
-});
-
-
-Route::post('/principal', 'PrincipalController@store')->name('principal.store');
 
 
 //Personal

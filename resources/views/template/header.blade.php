@@ -410,11 +410,11 @@
                                     @endcan
 
                                     @can('ConsultarRutina')
-                                        <li>
+                                        {{-- <li>
                                             <a href="{{url('/ver_Rutinas')}}">
                                                 <span class="sub-item">Ver mi rutina</span>
                                             </a>
-                                        </li>
+                                        </li> --}}
                                     @endcan
 
 
