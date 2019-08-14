@@ -356,7 +356,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{url('/Editar_Avances')}}">
+                                            <a href="{{url('/Consultar_Avances')}}">
                                                 <span class="sub-item">Consultar</span>
                                             </a>
                                         </li>

@@ -2,7 +2,7 @@
 
 
 @section('content_header')
-<h4 class="page-title">Cliente</h4>
+<h4 class="page-title">Avances</h4>
 
 @stop
 
@@ -10,13 +10,13 @@
 @section('content')
 
 
-<body onload="buscar();mensaje('{{$color}}','{{$mensaje}}');">
+<body onload="">
 <div class="row"><!-- Inicio ROW-->
 	<div class="col-md-12"><!-- Inicio de columna de row -->
 		<div class="card"><!-- inicio de cuerpo card -->
 			<!-- Cabecera titulo -->
 			<div class="card-header">
-				<div class="card-title">Lista Cliente</div>
+				<div class="card-title">Consultar Avances</div>
 
 			</div><!-- fin cabecera   -->
 			<div class="card-body">
@@ -28,6 +28,9 @@
 				</center>
 					<br>
 				<div id="tabla" name="tabla">
+					
+				</div>
+				<div id="tabla2" name="tabla2">
 					
 				</div>
 			</div>
@@ -44,18 +47,6 @@
 @section('jscustom')
 <script type="text/javascript">
 
-	function limpiar(){
-		document.getElementById('Nombre').value="";
-		document.getElementById('Apellido_Paterno').value="";
-		document.getElementById('Apellido_Materno').value="";
-		document.getElementById('Direccion').value="";
-		document.getElementById('Correo_Personal').value="";
-		document.getElementById('Telefono').value="";
-		document.getElementById('NombreB').value="";
-		document.getElementById('modi').style.display = 'none';
-		document.getElementById('NombreB').disabled = '';
-
-	}
 
 function buscar(){
 		document.getElementById('tabla').style.display = 'block';
@@ -75,20 +66,17 @@ function buscar(){
                     +'<th scope="col" style="color:white;">Email</th>'
                     +'<th scope="col" style="color:white;">Direccion</th>'
                     +'<th scope="col" style="color:white;">Telefono</th>'
+                    +'<th scope="col" style="color:white;">Generar</th>'
                     +'</tr></thead>'
                     +'<tbody style=" overflow: auto;">';
           for(i=0; i<data.length; i++) {
-             var nombre="'"+data[i].Nombre+"'";
-             var ap="'"+data[i].A_paterno+"'";
-             var am="'"+data[i].A_materno+"'";
-             var ema="'"+data[i].Correo+"'";
-             var dire="'"+data[i].Direccion+"'";
-             var tel="'"+data[i].Telefono+"'";
+             var nombre="'"+data[i].Nombre+' '+data[i].A_paterno+' '+data[i].A_materno+"'";
           html+='<tr>'+
                       '<th scope="row">'+data[i].Nombre+" "+data[i].A_paterno+" "+data[i].A_materno+'</th>'+
                       '<th scope="row">'+data[i].Correo+'</th>'+
                       '<th scope="row">'+data[i].Direccion+'</th>'+
                       '<th scope="row">'+data[i].Telefono+'</th>'+
+                      '<th><button onclick="Generar('+data[i].Id_persona+','+nombre+');" class="btn btn-success" value="Registrar">Generar</button></th>'
                       '</tr> ';
           }
           html+="</tbody></table>";
@@ -99,7 +87,48 @@ function buscar(){
 
 
 }
-  
+function Generar(id,nomb){
+
+	$.get("{{url('/Consulta/Avances')}}/"+id, function(data){
+          if (data == "No hay datos") {
+            html="";
+            mensaje("warning","Sin resultados");
+
+          }else{ 
+
+          var html = '<table class="table" >'
+                    +' <thead class="bg-info" style=" overflow: 0;" ><tr>'
+                    +'<th scope="col" style="color:white;">Nombre</th>'
+                    +'<th scope="col" style="color:white;">Peso</th>'
+                    +'<th scope="col" style="color:white;">Altura</th>'
+                    +'<th scope="col" style="color:white;">IMC</th>'
+                    +'<th scope="col" style="color:white;">% de grasa en los brazos</th>'
+                    +'<th scope="col" style="color:white;">% de grasa en el abdomen</th>'
+                    +'<th scope="col" style="color:white;">% de grasa en las piernas</th>'
+                    +'<th scope="col" style="color:white;">Fecha</th>'
+                    +'</tr></thead>'
+                    +'<tbody style=" overflow: auto;">';
+          for(i=0; i<data.length; i++) {
+          html+='<tr>'+
+                      '<th scope="row">'+nomb+'</th>'+
+                      '<th scope="row">'+data[i].Peso+'</th>'+
+                      '<th scope="row">'+data[i].Altura+'</th>'+
+                      '<th scope="row">'+data[i].IMC+'</th>'+
+                      '<th scope="row">'+data[i].pgb+'</th>'+
+                      '<th scope="row">'+data[i].pga+'</th>'+
+                      '<th scope="row">'+data[i].pgp+'</th>'+
+                      '<th scope="row">'+data[i].Fecha+'</th>'+
+                      '</tr> ';
+          }
+          html+="</tbody></table>";
+         
+        }
+        $('#tabla2').html(html);
+        });
+
+
+}
+
 
 	function mensaje(color,mensaje){
 		if(mensaje=="sin_mensaje"){
