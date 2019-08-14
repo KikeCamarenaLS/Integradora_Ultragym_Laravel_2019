@@ -2,7 +2,7 @@
 
 
 @section('content_header')
-<h4 class="page-title">Paquetes</h4>
+<h4 class="page-title">Rutinas</h4>
 
 @stop
 
@@ -16,7 +16,7 @@
 			<div class="card"><!-- inicio de cuerpo card -->
 				<!-- Cabecera titulo -->
 				<div class="card-header">
-					<div class="card-title">Nueva Rutina</div>
+					<div class="card-title">Nuevo Ejercicio</div>
 
 				</div><!-- fin cabecera   -->
 

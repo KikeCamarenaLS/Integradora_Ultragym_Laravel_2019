@@ -172,8 +172,13 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{url('/listado_usuario')}}">
+                                            <a href="{{url('/Permisos')}}">
                                                 <span class="sub-item">Permisos</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('/ListadoUsuariosRol')}}">
+                                                <span class="sub-item">Listado Usuarios</span>
                                             </a>
                                         </li>
 
@@ -238,7 +243,7 @@
                             </a>
                             <div class="collapse" id="Paquetes_collapse">
                                 <ul class="nav nav-collapse">
-                        
+
 
                                     @can('GestionarPaquetes')
                                         <li>
@@ -310,18 +315,13 @@
 
                                     @can('GestionarTienda')
                                         <li>
-                                            <a href="{{url('/ver_Tienda')}}">
+                                            <a href="{{url('/productos')}}">
                                                 <span class="sub-item">Subir Producto</span>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="{{url('/ver_Tienda')}}">
+                                            <a href="{{url('/productos_edit')}}">
                                                 <span class="sub-item">Ver</span>
-                                            </a>
-                                        </li>
-                                         <li>
-                                            <a href="{{url('/Editar_Tienda')}}">
-                                                <span class="sub-item">Editar</span>
                                             </a>
                                         </li>
                                     @endcan
@@ -349,18 +349,12 @@
 
                                     @can('GestionarAvances')
                                         <li>
-                                            <a href="{{url('/ver_Avances')}}">
+                                            <a href="{{url('/registrar_avance')}}">
                                                 <span class="sub-item">Registro de avances</span>
                                             </a>
                                         </li>
-
-                                         <li>
-                                            <a href="{{url('/Editar_Avances')}}">
-                                                <span class="sub-item">Editar</span>
-                                            </a>
-                                        </li>
                                         <li>
-                                            <a href="{{url('/Editar_Avances')}}">
+                                            <a href="{{url('/Consultar_Avances')}}">
                                                 <span class="sub-item">Consultar</span>
                                             </a>
                                         </li>

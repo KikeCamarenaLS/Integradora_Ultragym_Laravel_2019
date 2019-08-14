@@ -48,6 +48,19 @@ Route::post('/RegistrarRutina','Gimnasio\Rutinas\RutinaController@registrarRutin
 Route::get('/nuevoEjercicio', 'Gimnasio\Rutinas\RutinaController@vistaRegistrarEjercicio')->name('vistaRegistrarEjercicio');
 Route::get('/cargar/card/rutina/{caja?}','Gimnasio\Rutinas\RutinaController@mostrarCardRutina')->name('jmostrarCardRutina');
 
+Route::get('/agregar/rutina/lista/{id?}/{nombre?}','Gimnasio\Rutinas\RutinaController@registrarRutinaLista')->name('aregistrarRutinaLista');
+
+Route::get('/ver_Rutinas','Gimnasio\Rutinas\RutinaController@vistaVerRutina')->name('vistaVerRutinal');
+Route::get('/cargar/combo/Rutinas','Gimnasio\Rutinas\RutinaController@cargarComboRutina')->name('cargarComboRutinal');
+Route::get('/pintar/resultado/combo/Rutinas/{selec?}','Gimnasio\Rutinas\RutinaController@resultadoComboRutina')->name('resultadoComboRutinal');
+
+
+Route::get('/Editar_Rutinas','Gimnasio\Rutinas\RutinaController@verEditar_Rutinas')->name('verEditar_Rutinasl');
+
+
+
+
+
 
 //fin ejercicios
 
@@ -104,6 +117,17 @@ Route::get('/Consultar_Cliente','ClienteController@vistaCliente')->name('vistaCl
 
 //Fin clientes
 
+//Avances
+Route::get('/registrar_avance','AvancesController@VistaAvances')->name('VistaAvances');//Vista Registrar
+Route::get('/nuevo_avance/registrar/{id?}/{peso?}/{altura?}/{imc?}/{pgb?}/{pga?}/{pgp?}','AvancesController@RegistrarAvance')->name('RegistrarAvance');//Guardar Personal
+Route::get('/Consultar_Avances','AvancesController@VistaCAvances')->name('VistaCAvances');//Vista Registrar
+Route::get('/Consulta/Avances/{id?}','AvancesController@ConsultaAvances')->name('ConsultaAvances');//Guardar Personal
+
+
+
+
+//Fin Avances
+
 
 //Roles
 Route::get('/Roles','RolesController@vistaRoles')->name('vistaRoles');
@@ -111,3 +135,35 @@ Route::get('/get-roles', 'RolesController@getRoles')->name('getRoles');
 Route::get('/get-roles-Admin','RolesController@RolesAdministrador')->name('AdminRoles');
 Route::get('/get-usuarios-by-rol/{idRol?}', 'RolesController@UsuariosPorRol')->name('UsuariosPorRol');
 Route::get('/get-permisos-by-rol/{idRol?}', 'RolesController@PermisosPorRol')->name('PermisosPorRol');
+Route::get('/Roles-disponibles-Persona/{idPersona?}', 'RolesController@RolesDiferentesRol')->name('RolesDisponibles');
+Route::get('/Permisos-de-rol', 'RolesController@getPermisos')->name('RolesDeRol');
+Route::put('/registro-rol/', 'RolesController@RegistrarRol')->name('RegistroRol');
+
+//Permisos
+
+Route::get('/Permisos', 'PermisosControler@vistaPermisos')->name('vistaPermisos');
+Route::get('/get-permisos', 'PermisosControler@getPermisos')->name('getPermisos');
+Route::put('/registrar-permiso', 'PermisosControler@registroPermisos')->name('registroPermiso');
+
+//Listado Personas
+
+Route::get('/ListadoUsuariosRol' , 'ListadoRolesControler@vistaListado')->name('vistaListadoRol');
+Route::get('/get-Listado', 'ListadoRolesControler@getListado')->name('GetListado');
+Route::get('/roles-diferent-get/{idRol?}', 'ListadoRolesControler@diferentesRoles')->name('DiferentesRoles');
+Route::put('/change-rol', 'ListadoRolesControler@ModificarRol')->name('ModificarRol');
+
+Route::get('/get-Detalles-usuarios/{idUser?}', 'ListadoRolesControler@DetallesUsuario')->name('DetallesUsarioRol');
+
+//Productos
+
+Route::get('/productos', 'ProductsController@create');
+Route::post('/productos_store', 'ProductsController@store');
+Route::get('/productos/edit/{id?}','ProductsController@edit');
+
+Route::get('/productos_edit', 'ProductsController@indexProductsEdit');
+Route::get('/get_productos', 'ProductsController@getProductos');
+Route::get('/get_productos/json', 'ProductsController@getProductosJSON');
+Route::get('/get-Tipo/product', 'ProductsController@getTipos');
+Route::get('/get-Tipo/product/discart/{id?}', 'ProductsController@getTiposDiscard');
+Route::put('/edit-product/put', 'ProductsController@editarProducto');
+Route::get('/get-Producto-Nombre/{Nombre?}', 'ProductsController@busquedaByName');

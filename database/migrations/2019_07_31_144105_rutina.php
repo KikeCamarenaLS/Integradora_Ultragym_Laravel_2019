@@ -13,10 +13,10 @@ class Rutina extends Migration
      */
     public function up()
     {
-        Schema::create('rutina', function (Blueprint $table) {
+        Schema::create('ejercicio', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->bigIncrements('id_rutina')->index();
-            $table->string('Nombre_Rutina');
+            $table->bigIncrements('id_ejercicio')->index();
+            $table->string('Nombre_Ejercicio');
             $table->string('Descripcion');
             $table->bigInteger('Serie');
             $table->bigInteger('Repeticiones');
