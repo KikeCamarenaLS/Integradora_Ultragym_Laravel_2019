@@ -10,6 +10,7 @@
 		class="row justify-content-center align-items-center" ><!-- Div ROw-->
 
 			<componente-producto :key="producto.id" :data-index="index" v-bind:producto="producto" v-for="(producto, index) in ArrayProductos"></componente-producto>
+			<contador-productos></contador-productos>
 
 
 		</transition-group><!-- Div ROw-->

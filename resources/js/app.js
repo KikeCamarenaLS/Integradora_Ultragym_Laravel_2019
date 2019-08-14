@@ -8,6 +8,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+
 const Vuex = require('vuex');
 
 window.store = new Vuex.Store({
