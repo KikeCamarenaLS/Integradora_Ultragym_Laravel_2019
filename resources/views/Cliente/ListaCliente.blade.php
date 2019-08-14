@@ -16,7 +16,7 @@
 		<div class="card"><!-- inicio de cuerpo card -->
 			<!-- Cabecera titulo -->
 			<div class="card-header">
-				<div class="card-title">Modificar Cliente</div>
+				<div class="card-title">Lista Cliente</div>
 
 			</div><!-- fin cabecera   -->
 			<div class="card-body">
@@ -75,8 +75,7 @@ function buscar(){
                     +'<th scope="col" style="color:white;">Email</th>'
                     +'<th scope="col" style="color:white;">Direccion</th>'
                     +'<th scope="col" style="color:white;">Telefono</th>'
-                    +'<th scope="col" style="color:white;">Eliminar</th>'
-                    +'<th scope="col" style="color:white;">Editar</th></tr></thead>'
+                    +'</tr></thead>'
                     +'<tbody style=" overflow: auto;">';
           for(i=0; i<data.length; i++) {
              var nombre="'"+data[i].Nombre+"'";
