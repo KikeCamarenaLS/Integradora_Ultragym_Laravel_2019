@@ -81,8 +81,8 @@
                             </a>
                         </li>-->
 
-                        <li class="navbar-nav ml-auto">
-                            <producto-contador></producto-contador>
+                        <li class="nav-link">
+                            <contador-productos></contador-productos>
                         </li>
                         <li class="nav-item dropdown hidden-caret">
                             <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{{url('/assets')}}/img/muscle.png" alt="image profile" width="36" class="img-circle"></a>
