@@ -22,7 +22,14 @@ class RutinaController extends Controller
     public function verEditar_Rutinas(){
         $color='danger';
         $mensaje='sin_mensaje';
-        return view('Rutinas.VerRutinas',compact("color","mensaje"));
+        return view('Rutinas.EditarEjercicio',compact("color","mensaje"));
+    }
+    
+    public function updateEjercicio($nom,$ser,$rep,$des){
+        DB::select('update ejercicio set  Descripcion="'.$des.'" , Serie='.$ser.' , Repeticiones='.$rep.' where Nombre_Ejercicio="'.$nom.'" ');
+        $color='success';
+        $mensaje='El ejercicio fue modificado correctamente';
+        return view('Rutinas.EditarEjercicio',compact("color","mensaje"));
     }
 
     public function cargarComboRutina(){

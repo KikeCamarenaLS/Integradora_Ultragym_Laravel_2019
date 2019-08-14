@@ -58,6 +58,8 @@ Route::get('/pintar/resultado/combo/Rutinas/{selec?}','Gimnasio\Rutinas\RutinaCo
 Route::get('/Editar_Rutinas','Gimnasio\Rutinas\RutinaController@verEditar_Rutinas')->name('verEditar_Rutinasl');
 
 
+Route::get('/update/ejercicio/{nom?}/{ser?}/{rep?}/{des?}','Gimnasio\Rutinas\RutinaController@updateEjercicio')->name('updateEjerciciol');
+
 
 
 
