@@ -1,6 +1,6 @@
 <template >
 	<a href="/carrito">Mi carrito {{ productsCount }}</a>
-		
+
 </template>
 
 <script>
@@ -11,5 +11,5 @@
 			}
 		}
 	}
-	
+
 </script>

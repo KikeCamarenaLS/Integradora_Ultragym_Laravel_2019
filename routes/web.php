@@ -14,7 +14,9 @@
 
 Route::get('/', 'PrincipalController@indexView')->name('indexRoute');
 Route::get('/principal', 'PrincipalController@indexView')->name('indexRou');
+Auth::routes();
 
+Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/principal/Cupones','PrincipalController@ConsultaPersonalPDF')->name('DescargarPDF');
 
@@ -80,7 +82,7 @@ Route::get('/registro', function () {
     return view('Index/registro');
 });
 
-Auth::routes();
+
 
 //hasta aqui carm,ociinternaldebug
 
@@ -180,3 +182,5 @@ Route::get('/tienda/get-products', 'TiendaController@productos');
 Route::resource("en_carrito", "ProductosEnCarritoComprasController",[
 	"only" => ["store", "destroy"]
 ]);
+
+});

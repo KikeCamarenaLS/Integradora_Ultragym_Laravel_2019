@@ -49,7 +49,7 @@ Vue.component('transicion-animacion', require('./components/animaciones/transici
 
 Vue.component('boton-agregar-carrito', require('./components/BotonCarrito.vue').default);
 Vue.component('producto-contador', require('./components/Contador.vue').default);
-Vue.component('contador-productos', require('./components/Shoppingcart/CounterComponent.vue').default);
+Vue.component('contador-productos', require('./components/shoppingcart/CounterComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
