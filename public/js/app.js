@@ -3937,6 +3937,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     //propiedades cuyo valor se calcula cuando se modifica algo para su valor
@@ -44642,8 +44643,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("a", { attrs: { href: "/carrito" } }, [
-    _vm._v("Mi carrito " + _vm._s(_vm.productsCount))
+  return _c("div", [
+    _c("a", { attrs: { href: "/carrito" } }, [
+      _vm._v("Mi carrito " + _vm._s(_vm.productsCount))
+    ])
   ])
 }
 var staticRenderFns = []
