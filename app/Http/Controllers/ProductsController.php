@@ -106,7 +106,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::where('id_producto', $id)->get();
+        $product = Product::where('id', $id)->get();
         //return $product;
         return view("Productos.productoEdit",["product" => $product ]);
     }
@@ -141,7 +141,7 @@ class ProductsController extends Controller
 
     public function getProductos()
     {
-        $consulta = "select pr.id_producto, pr.Nombre_Producto, pr.Descripcion, pr.Precio, pr.Existencia, cp.Categoria, pr.image_url
+        $consulta = "select pr.id, pr.Nombre_Producto, pr.Descripcion, pr.Precio, pr.Existencia, cp.Categoria, pr.image_url
                     , cp.id_categoria from producto pr INNER JOIN categoria_producto cp ON pr.id_categoria = cp.id_categoria";
         $producto = DB::select($consulta);
         return $producto;
@@ -149,7 +149,7 @@ class ProductsController extends Controller
 
     public function getProductosJSON()
     {
-        $consulta = "select pr.id_producto, pr.Nombre_Producto, pr.Descripcion, pr.Precio, pr.Existencia, cp.Categoria,
+        $consulta = "select pr.id, pr.Nombre_Producto, pr.Descripcion, pr.Precio, pr.Existencia, cp.Categoria,
                     cp.id_categoria from producto pr INNER JOIN categoria_producto cp ON pr.id_categoria = cp.id_categoria";
         $producto = DB::select($consulta);
         return json_encode($producto);
@@ -179,7 +179,7 @@ class ProductsController extends Controller
         $Existencia = $request->ExistenciaProduct;
         $IdProducto = $request->IdProducto;
 
-        $acualizar = "update producto set Nombre_Producto = '".$NombreProduct." ', Descripcion = '".$DescripcionProduct."' , Precio = ".$PrecioProduct." ,Existencia =  ".$Existencia." , id_categoria = ".$IdCategoria." where id_producto = ".$IdProducto;
+        $acualizar = "update producto set Nombre_Producto = '".$NombreProduct." ', Descripcion = '".$DescripcionProduct."' , Precio = ".$PrecioProduct." ,Existencia =  ".$Existencia." , id_categoria = ".$IdCategoria." where id = ".$IdProducto;
         DB::update($acualizar);
 
     }
@@ -187,7 +187,7 @@ class ProductsController extends Controller
     public function busquedaByName($nombre){
 
 
-        $consulta = "select pr.id_producto, pr.Nombre_Producto, pr.Descripcion, pr.Precio, pr.Existencia, cp.Categoria, pr.image_url
+        $consulta = "select pr.id, pr.Nombre_Producto, pr.Descripcion, pr.Precio, pr.Existencia, cp.Categoria, pr.image_url
                     , cp.id_categoria from producto pr INNER JOIN categoria_producto cp ON pr.id_categoria = cp.id_categoria where pr.Nombre_Producto = '".$nombre."'";
         $producto = DB::select($consulta);
         return $producto;

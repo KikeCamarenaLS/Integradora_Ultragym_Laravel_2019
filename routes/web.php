@@ -147,3 +147,7 @@ Route::get('/get-Producto-Nombre/{Nombre?}', 'ProductsController@busquedaByName'
 
 Route::get('/tienda', 'TiendaController@principal');
 Route::get('/tienda/get-products', 'TiendaController@productos');
+
+Route::resource("en_carrito", "ProductosEnCarritoComprasController",[
+	"only" => ["store", "destroy"]
+]);

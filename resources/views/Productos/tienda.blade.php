@@ -3,7 +3,6 @@
 
 @section('content_header')
 <h4 class="page-title">Tienda Online</h4>
-
 @stop
 
 

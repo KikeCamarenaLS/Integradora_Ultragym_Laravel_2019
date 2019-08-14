@@ -9,7 +9,7 @@
 		@leave="leave"
 		class="row justify-content-center align-items-center" ><!-- Div ROw-->
 
-			<componente-producto :key="producto.id_Producto" :data-index="index" v-bind:producto="producto" v-for="(producto, index) in ArrayProductos"></componente-producto>
+			<componente-producto :key="producto.id" :data-index="index" v-bind:producto="producto" v-for="(producto, index) in ArrayProductos"></componente-producto>
 
 
 		</transition-group><!-- Div ROw-->

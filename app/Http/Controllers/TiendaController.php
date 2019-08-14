@@ -7,9 +7,11 @@ use App\Product;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\ProductosCollection;
 
+
 class TiendaController extends Controller
 {
-    public function principal(){
+    public function principal(Request $request){
+
     	return view('Productos.tienda');
     }
 

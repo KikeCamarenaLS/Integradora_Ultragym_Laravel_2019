@@ -25,7 +25,7 @@
 						</ul>
 					</div>
 					<div class="card-footer">
-						<button class="btn btn-primary btn-block"><b>Comprar</b></button>
+						<boton-agregar-carrito v-bind:product="producto"></boton-agregar-carrito>
 					</div>
 				</div>
 			</div>
