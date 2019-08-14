@@ -172,3 +172,11 @@ Route::get('/get-Tipo/product', 'ProductsController@getTipos');
 Route::get('/get-Tipo/product/discart/{id?}', 'ProductsController@getTiposDiscard');
 Route::put('/edit-product/put', 'ProductsController@editarProducto');
 Route::get('/get-Producto-Nombre/{Nombre?}', 'ProductsController@busquedaByName');
+
+
+Route::get('/tienda', 'TiendaController@principal');
+Route::get('/tienda/get-products', 'TiendaController@productos');
+
+Route::resource("en_carrito", "ProductosEnCarritoComprasController",[
+	"only" => ["store", "destroy"]
+]);
