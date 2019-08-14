@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Auth;
+
 class AvancesController extends Controller
 {
     public function VistaAvances(){
@@ -26,5 +28,16 @@ class AvancesController extends Controller
                     historialsalud where id_persona ='.$id.'');
     	return $avances;
 
+    }
+    public function VistaMisAvances(){
+        return view('Avances.MisAvances');
+
+    }
+
+    public function ConsultaMisAvances(){
+        $id = Auth::id();
+        $avances = DB::select('select * from 
+                    historialsalud where id_persona ='.$id.'');
+        return $avances;
     }
 }

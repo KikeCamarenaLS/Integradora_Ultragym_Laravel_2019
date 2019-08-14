@@ -10,26 +10,17 @@
 @section('content')
 
 
-<body onload="">
+<body onload="Generar()">
 <div class="row"><!-- Inicio ROW-->
 	<div class="col-md-12"><!-- Inicio de columna de row -->
 		<div class="card"><!-- inicio de cuerpo card -->
 			<!-- Cabecera titulo -->
 			<div class="card-header">
-				<div class="card-title">Consultar Avances</div>
+				<div class="card-title">Mis Avances</div>
 
 			</div><!-- fin cabecera   -->
 			<div class="card-body">
 				<center>
-					<div class="col-md-4">
-						<label>Nombre(s)</label>
-						<input required="" type="text" class="form-control success" id="NombreB" name="NombreB" placeholder="Nombre(s)" onkeypress="buscar()" onkeyup="buscar()">
-					</div>
-				</center>
-					<br>
-				<div id="tabla" name="tabla">
-					
-				</div>
 				<div id="tabla2" name="tabla2">
 					
 				</div>
@@ -47,49 +38,9 @@
 @section('jscustom')
 <script type="text/javascript">
 
+function Generar(){
 
-function buscar(){
-		document.getElementById('tabla').style.display = 'block';
-        var Nombre= document.getElementById('NombreB').value;
-        //alert("{{url('/Consulta/Personal')}}/"+Bienes+"/"+Marcas);
-
-        $.get("{{url('/Consulta/Cliente')}}/"+Nombre, function(data){
-          if (data == "No hay datos") {
-            html="";
-            mensaje("warning","Sin resultados");
-
-          }else{ 
-
-          var html = '<table class="table" >'
-                    +' <thead class="bg-info" style=" overflow: 0;" ><tr>'
-                    +'<th scope="col" style="color:white;">Nombre</th>'
-                    +'<th scope="col" style="color:white;">Email</th>'
-                    +'<th scope="col" style="color:white;">Direccion</th>'
-                    +'<th scope="col" style="color:white;">Telefono</th>'
-                    +'<th scope="col" style="color:white;">Generar</th>'
-                    +'</tr></thead>'
-                    +'<tbody style=" overflow: auto;">';
-          for(i=0; i<data.length; i++) {
-             var nombre="'"+data[i].Nombre+' '+data[i].A_paterno+' '+data[i].A_materno+"'";
-          html+='<tr>'+
-                      '<th scope="row">'+data[i].Nombre+" "+data[i].A_paterno+" "+data[i].A_materno+'</th>'+
-                      '<th scope="row">'+data[i].Correo+'</th>'+
-                      '<th scope="row">'+data[i].Direccion+'</th>'+
-                      '<th scope="row">'+data[i].Telefono+'</th>'+
-                      '<th><button onclick="Generar('+data[i].Id_persona+','+nombre+');" class="btn btn-success" value="Registrar">Generar</button></th>'
-                      '</tr> ';
-          }
-          html+="</tbody></table>";
-         
-        }
-        $('#tabla').html(html);
-        });
-
-
-}
-function Generar(id,nomb){
-
-	$.get("{{url('/Consulta/Avances')}}/"+id, function(data){
+	$.get("{{url('/Consulta/MisAvances')}}", function(data){
           if (data == "No hay datos") {
             html="";
             mensaje("warning","Sin resultados");
@@ -110,7 +61,7 @@ function Generar(id,nomb){
                     +'<tbody style=" overflow: auto;">';
           for(i=0; i<data.length; i++) {
           html+='<tr>'+
-                      '<th scope="row">'+nomb+'</th>'+
+                      
                       '<th scope="row">'+data[i].Peso+'</th>'+
                       '<th scope="row">'+data[i].Altura+'</th>'+
                       '<th scope="row">'+data[i].IMC+'</th>'+
