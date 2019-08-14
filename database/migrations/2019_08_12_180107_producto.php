@@ -15,7 +15,7 @@ class Producto extends Migration
     {
         Schema::create('producto', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->bigIncrements('id_producto')->index();
+            $table->bigIncrements('id')->index();
             $table->string('Nombre_Producto');
             $table->string('Descripcion')->nullable();
             $table->bigInteger('Precio')->default(0);

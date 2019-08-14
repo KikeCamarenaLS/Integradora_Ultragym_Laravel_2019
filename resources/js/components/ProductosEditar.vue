@@ -47,7 +47,7 @@
 								</td>
 								<td style="text-transform: uppercase;">
 									<center>
-										<button class="btn btn-warning" v-on:click="EditarProducto( producto.id_producto, producto.Nombre_Producto, producto.Descripcion, producto.Precio, producto.Existencia, producto.Categoria, producto.image_url, producto.id_categoria )">
+										<button class="btn btn-warning" v-on:click="EditarProducto( producto.id, producto.Nombre_Producto, producto.Descripcion, producto.Precio, producto.Existencia, producto.Categoria, producto.image_url, producto.id_categoria )">
 											<span class="btn-label">
 												<i class="flaticon-pencil"></i>
 											</span>
@@ -269,7 +269,7 @@
 
 		created: function(){
 			this.getProducts();
-			this.datatable();
+			
 			//this.datatable();
 		},
 
@@ -312,6 +312,7 @@
 					/*var table = $('#tabla_Productos').DataTable({});
 					table.destroy();*/
 					this.ArrayProducto = response.data
+					this.datatable();
 				});
 
 			},
