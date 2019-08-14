@@ -11,7 +11,6 @@ class CategoriaSeed extends Seeder
      */
     public function run()
     {
-        
          $tipos = ['Ropa', 'Consumibles', 'Accesorios', 'Equipo', 'Aparatos', 'Otros'];
 
         for($i =0; $i< count($tipos); $i++){
