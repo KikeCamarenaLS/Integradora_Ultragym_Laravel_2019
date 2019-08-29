@@ -81,8 +81,9 @@
                             </a>
                         </li>-->
 
-                        <li class="navbar-nav ml-auto">
-                            <producto-contador></producto-contador>
+                        <li class="nav-link">
+
+
                         </li>
                         <li class="nav-item dropdown hidden-caret">
                             <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{{url('/assets')}}/img/muscle.png" alt="image profile" width="36" class="img-circle"></a>
@@ -374,80 +375,7 @@
                             </div>
                         </li>
 
-                        <li class="nav-item ">
-                            <a data-toggle="collapse" href="#Dietas_collapse">
-                                <i class="la la-thumbs-up"></i>
-                                <p>Dietas</p>
-                                <span class="caret"></span>
-                            </a>
-                            <div class="collapse" id="Dietas_collapse">
-                                <ul class="nav nav-collapse">
-                                    @can('GestionarDietas')
-                                        <li>
-                                            <a href="{{url('/ver_Dietas')}}">
-                                                <span class="sub-item">Crear Dietas</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{url('/ver_Dietas')}}">
-                                                <span class="sub-item">Ver</span>
-                                            </a>
-                                        </li>
-                                         <li>
-                                            <a href="{{url('/Editar_Dietas')}}">
-                                                <span class="sub-item">Gestionar</span>
-                                            </a>
-                                        </li>
-                                    @endcan
-
-                                    @can('ConsultarDieta')
-                                        <li>
-                                            <a href="{{url('/Editar_Dietas')}}">
-                                                <span class="sub-item">Ver mis dietas</span>
-                                            </a>
-                                        </li>
-                                    @endcan
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item ">
-                            <a data-toggle="collapse" href="#Salud_collapse">
-                                <i class="la la-gittip"></i>
-                                <p>Salud</p>
-                                <span class="caret"></span>
-                            </a>
-                            <div class="collapse" id="Salud_collapse">
-                                <ul class="nav nav-collapse">
-                                    @can('GestionarDietas')
-                                        <li>
-                                            <a href="{{url('/ver_Dietas')}}">
-                                                <span class="sub-item">Registrar control salud</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{url('/ver_Dietas')}}">
-                                                <span class="sub-item">Ver mi control de salud</span>
-                                            </a>
-                                        </li>
-                                         <li>
-                                            <a href="{{url('/Editar_Dietas')}}">
-                                                <span class="sub-item">Historial salud</span>
-                                            </a>
-                                        </li>
-                                    @endcan
-
-                                    @can('ConsultarDieta')
-                                        <li>
-                                            <a href="{{url('/Editar_Dietas')}}">
-                                                <span class="sub-item">Ver mis dietas</span>
-                                            </a>
-                                        </li>
-                                    @endcan
-                                </ul>
-                            </div>
-                        </li>
-
+                        
                         <li class="nav-item ">
                             <a data-toggle="collapse" href="#Rutinas_collapse">
                                 <i class="la la-street-view"></i>
@@ -482,11 +410,11 @@
                                     @endcan
 
                                     @can('ConsultarRutina')
-                                        <li>
+                                        {{-- <li>
                                             <a href="{{url('/ver_Rutinas')}}">
                                                 <span class="sub-item">Ver mi rutina</span>
                                             </a>
-                                        </li>
+                                        </li> --}}
                                     @endcan
 
 
