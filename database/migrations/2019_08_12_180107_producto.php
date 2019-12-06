@@ -15,13 +15,14 @@ class Producto extends Migration
     {
         Schema::create('producto', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->bigIncrements('id_producto')->index();
+            $table->bigIncrements('id')->index();
             $table->string('Nombre_Producto');
             $table->string('Descripcion')->nullable();
             $table->bigInteger('Precio')->default(0);
             $table->bigInteger('Existencia')->default(0);
             $table->string('image_url')->nullable();
-
+            $table->bigInteger('id_categoria')->unsigned();
+            $table->foreign('id_categoria')->references('id_categoria')->on('categoria_producto');
             $table->timestamps();
 
         });

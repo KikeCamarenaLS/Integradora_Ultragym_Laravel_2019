@@ -14,9 +14,33 @@
 
 Route::get('/', 'PrincipalController@indexView')->name('indexRoute');
 Route::get('/principal', 'PrincipalController@indexView')->name('indexRou');
-
-
+Route::post('/principal', 'PrincipalController@store')->name('principal.store');
 Route::get('/principal/Cupones','PrincipalController@ConsultaPersonalPDF')->name('DescargarPDF');
+
+Route::get('/home', 'UsuarioController@principal')->name('usuarioPrincipal');
+
+//Login
+Route::post('/principal/Verifica','PrincipalController@Login')->name('principal.Login');
+
+
+Route::get('/registro', function () {
+    return view('Index/registro');
+});
+
+
+
+//hasta aqui carm,ociinternaldebug
+
+Route::get('/registro', function () {
+    return view('Index/registro');
+});
+
+Auth::routes();
+
+
+Route::group(['middleware' => 'auth'], function () {
+
+
 
 
 
@@ -48,6 +72,21 @@ Route::post('/RegistrarRutina','Gimnasio\Rutinas\RutinaController@registrarRutin
 Route::get('/nuevoEjercicio', 'Gimnasio\Rutinas\RutinaController@vistaRegistrarEjercicio')->name('vistaRegistrarEjercicio');
 Route::get('/cargar/card/rutina/{caja?}','Gimnasio\Rutinas\RutinaController@mostrarCardRutina')->name('jmostrarCardRutina');
 
+Route::get('/agregar/rutina/lista/{id?}/{nombre?}','Gimnasio\Rutinas\RutinaController@registrarRutinaLista')->name('aregistrarRutinaLista');
+
+Route::get('/ver_Rutinas','Gimnasio\Rutinas\RutinaController@vistaVerRutina')->name('vistaVerRutinal');
+Route::get('/cargar/combo/Rutinas','Gimnasio\Rutinas\RutinaController@cargarComboRutina')->name('cargarComboRutinal');
+Route::get('/pintar/resultado/combo/Rutinas/{selec?}','Gimnasio\Rutinas\RutinaController@resultadoComboRutina')->name('resultadoComboRutinal');
+
+
+Route::get('/Editar_Rutinas','Gimnasio\Rutinas\RutinaController@verEditar_Rutinas')->name('verEditar_Rutinasl');
+
+
+Route::get('/update/ejercicio/{nom?}/{ser?}/{rep?}/{des?}','Gimnasio\Rutinas\RutinaController@updateEjercicio')->name('updateEjerciciol');
+
+
+
+
 
 //fin ejercicios
 
@@ -55,26 +94,10 @@ Route::get('/cargar/card/rutina/{caja?}','Gimnasio\Rutinas\RutinaController@most
 
 
 
-Route::get('/home', 'UsuarioController@principal')->name('usuarioPrincipal');
-
-//Login
-Route::post('/principal/Verifica','PrincipalController@Login')->name('principal.Login');
 
 
-Route::get('/registro', function () {
-    return view('Index/registro');
-});
-
-Auth::routes();
-
-//hasta aqui carm,ociinternaldebug
-
-Route::get('/registro', function () {
-    return view('Index/registro');
-});
 
 
-Route::post('/principal', 'PrincipalController@store')->name('principal.store');
 
 
 //Personal
@@ -103,6 +126,20 @@ Route::get('/Consultar_Cliente','ClienteController@vistaCliente')->name('vistaCl
 
 
 //Fin clientes
+
+//Avances
+Route::get('/registrar_avance','AvancesController@VistaAvances')->name('VistaAvances');//Vista Registrar
+Route::get('/nuevo_avance/registrar/{id?}/{peso?}/{altura?}/{imc?}/{pgb?}/{pga?}/{pgp?}','AvancesController@RegistrarAvance')->name('RegistrarAvance');//Guardar Personal
+Route::get('/Consultar_Avances','AvancesController@VistaCAvances')->name('VistaCAvances');//Vista Registrar
+Route::get('/Consulta/Avances/{id?}','AvancesController@ConsultaAvances')->name('ConsultaAvances');//Guardar Personal
+Route::get('/ver_Avances','AvancesController@VistaMisAvances')->name('VistaMisAvances');//Vista Registrar
+Route::get('/Consulta/MisAvances','AvancesController@ConsultaMisAvances')->name('ConsultaMisAvances');//Guardar Personal
+
+
+
+
+
+//Fin Avances
 
 
 //Roles
@@ -135,3 +172,21 @@ Route::get('/get-Detalles-usuarios/{idUser?}', 'ListadoRolesControler@DetallesUs
 Route::get('/productos', 'ProductsController@create');
 Route::post('/productos_store', 'ProductsController@store');
 Route::get('/productos/edit/{id?}','ProductsController@edit');
+
+Route::get('/productos_edit', 'ProductsController@indexProductsEdit');
+Route::get('/get_productos', 'ProductsController@getProductos');
+Route::get('/get_productos/json', 'ProductsController@getProductosJSON');
+Route::get('/get-Tipo/product', 'ProductsController@getTipos');
+Route::get('/get-Tipo/product/discart/{id?}', 'ProductsController@getTiposDiscard');
+Route::put('/edit-product/put', 'ProductsController@editarProducto');
+Route::get('/get-Producto-Nombre/{Nombre?}', 'ProductsController@busquedaByName');
+
+
+Route::get('/tienda', 'TiendaController@principal');
+Route::get('/tienda/get-products', 'TiendaController@productos');
+
+Route::resource("en_carrito", "ProductosEnCarritoComprasController",[
+	"only" => ["store", "destroy"]
+]);
+
+});

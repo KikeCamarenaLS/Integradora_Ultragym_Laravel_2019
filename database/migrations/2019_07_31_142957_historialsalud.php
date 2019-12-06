@@ -19,8 +19,11 @@ class Historialsalud extends Migration
             $table->bigInteger('id_persona');
             $table->bigInteger('Peso');
             $table->bigInteger('Altura');
+            $table->bigInteger('pgb');
+            $table->bigInteger('pga');
+            $table->bigInteger('pgp');
             $table->date('Fecha');
-            $table->string('Enfermedad');
+            $table->bigInteger('IMC');
         });
     }
 

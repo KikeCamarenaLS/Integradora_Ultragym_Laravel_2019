@@ -106,6 +106,9 @@
 
 @section('jscustom')
 <script type="text/javascript">
+	function comboRutina(){
+		
+	}
 	function CargarTabla(){
 		$.get("{{url('/cargar/tabla/paquetes')}}", function(data){
          var html='<table class="table table-bordered table-head-bg-primary table-bordered-bd-primary mt-4">'+

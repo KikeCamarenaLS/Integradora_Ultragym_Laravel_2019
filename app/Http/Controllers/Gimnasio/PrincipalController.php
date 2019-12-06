@@ -17,6 +17,15 @@ use App\variables;
 class PrincipalController extends Controller
 {
 
+  public function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('guest')->except(['logout','principal']);
+
+
+    }
+
 	public function indexView()
 	{
 
@@ -33,10 +42,6 @@ class PrincipalController extends Controller
 		return $pdf->download('Cuponera de regalo.pdf');
 	}
 
-	   public function __construct()
-    {
-        $this->middleware('guest')->except(['logout','principal']);
-    }
 
 
 
